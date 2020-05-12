@@ -1,0 +1,211 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello!{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+
+    </style>
+
+    <body>
+<fieldset class="container">
+    <div class="col-md-15">
+        <div class="card shadow-lg border-0 rounded-lg mt-1">
+            <div class="card-header border-bottom-success" >
+                <h3  class="text-gray-900 text-center font-weight-bold my-4 ">
+                    Modifier  Devis Vierge N° <b style="color: #ff253a">{{ devisVierge.num }}/{{ devisVierge.year }}</b> :
+                </h3>
+            </div>
+            <div class="card-body" >
+{{ form_start(form) }}
+
+                <fieldset class=" card-header border-bottom-warning border-left-warning" >
+                    <h5  style="color: red;text-align: right"><b>Devis Vierge</b></h5>
+
+
+                    <div class="row">
+                        <div class="col">
+
+                <div class="form-group">
+                    <div class="m-0 font-weight-bold text-primary">
+                        {{ form_label(form.date_edition,'Date édition') }}
+                    </div>
+                    {{ form_widget(form.date_edition) }}
+                </div>
+                        </div>
+
+            <div class="col">
+
+
+                <div class="form-group">
+                    <div class="m-0 font-weight-bold text-primary">
+                        {{ form_label(form.date_limite) }}
+                    </div>
+                    {{ form_widget(form.date_limite) }}
+                </div>
+            </div>
+
+                        <div class="col">
+
+                        <div class="form-group">
+            <div class="m-0 font-weight-bold text-primary">
+                {{ form_label(form.nb_devis_edit,'Nombre Devis Editèes') }}
+            </div>
+            {{ form_widget(form.nb_devis_edit,
+                {'attr': {'class': 'form-control dropdown-toggle','value' :'3','min' : 0,}}) }}
+        </div>
+                        </div>
+                    </div>
+                    <br>
+                    <hr>
+
+                    <div class="table-responsive">
+                        <table name="cart" class="table table-bordered" width="100%" cellspacing="0" id="myTable" >
+                            <thead style="background-color: #ff253a;opacity: 0.9; color: #FFFFFF";>
+                            <tr role="row">
+                                <th>#</th>
+                                <th>Produit</th>
+                                <th>Quantite</th>
+                                <th></th>
+
+                            </tr>
+
+                            </thead>
+                            <tbody class="tags" data-prototype="{{ form_widget(form.ligneDevisVierges.vars.prototype)|e('html_attr') }}">
+
+                            {% for k,l in form.ligneDevisVierges %}
+                            <tr role="row" name="line_items">
+
+                                <td> {{ k+1 }}</td>
+
+                                <td>
+
+
+                                    {{ form_widget(l.produit,
+                                        {'attr': {'class': 'form-control form-control-sm'}}) }}
+
+                                </td>
+                                <td>
+
+                                    {{ form_widget(l.quantite,{'attr': {'class': ' form-control form-control-sm','step':'0.01'
+                                    },'type':'number'
+                                    }) }}
+
+                                </td>
+
+
+                                {% endfor %}
+
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <a  href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#submitModal">Valider</a>
+                    <!-- submit Modal-->
+                    <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog " role="document">
+                            <div class="modal-content">
+                                <div class="modal-header modal-colored-header bg-primary">
+                                    <h5 class="modal-title text-white" id="exampleModalLabel">Sure?</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span class="text-white" aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">Are you sure you want to submit?</div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+                                    <button class="btn btn-primary" type="submit">Valider</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end-->
+                    {{ form_end(form) }}
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</fieldset>
+<!-- Embed Collection -->
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<script>
+    var $collectionHolder;
+
+    var $addLigneButton = $('<button  class="add_tag_link btn btn-success btn-icon-split" type="button">\n' +
+        '                    <span class="icon text-white">\n' +
+        '                      <i class="fas fa-plus"></i>\n' +
+        '                    </span>\n' +
+        '                   <span class="text">Ajouter</span></button>');
+    var $newLinkLi = $('<tbody></tbody>').append($addLigneButton);
+
+
+    jQuery(document).ready(function() {
+        // Get the ul that holds the collection of lignes
+        $collectionHolder = $('tbody.tags');
+
+        // add the "add a ligne" anchor and li to the ligne url
+        /////////////////  Supprimer cette ligne pour supprimer le bouton ajouter //////////////
+        $collectionHolder.append($newLinkLi);
+        ////////////////  FIN SUPRESSION /////////////////////////////////
+
+        $collectionHolder.find('tr').each(function() {
+            addLigneFormDeleteLink($(this));
+        });
+        // count the current form inputs we have (e.g. 2), use that as the new
+        // index when inserting a new item (e.g. 2)
+        $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+        $addLigneButton.on('click', function(e) {
+            // add a new tag form (see next code block)
+            addLigneForm($collectionHolder, $newLinkLi);
+        });
+    });
+
+    ////////////  Supprimer cette fonction pour élimner l'ajout de ligne   //////////
+    function addLigneForm($collectionHolder, $newLinkLi) {
+        // Get the data-prototype explained earlier
+        var prototype = $collectionHolder.data('prototype');
+
+        // get the new index
+        var index = $collectionHolder.data('index');
+
+        var newForm = prototype;
+        // You need this only if you didn't set 'label' => false in your tags field in TaskType
+        // Replace '__name__label__' in the prototype's HTML to
+        // instead be a number based on how many items we have
+        // newForm = newForm.replace(/__name__label__/g, index);
+
+        // Replace '__name__' in the prototype's HTML to
+        // instead be a number based on how many items we have
+        newForm = newForm.replace(/__name__/g, index);
+
+        // increase the index with one for the next item
+        $collectionHolder.data('index', index + 1);
+
+        // Display the form in the page in an li, before the "Add a tag" link li
+        var $newFormLi = $('<td></td>').append(newForm);
+        $newLinkLi.before($newFormLi);
+        addLigneFormDeleteLink($newFormLi);
+    }
+
+    ////////////  FIN SUPRESSION   //////////
+
+    function addLigneFormDeleteLink($ligneFormLi) {
+        var $removeFormButton = $('<button class="btn btn-danger btn-rectangle delete" >' +
+            '<span class="icon text-white"> <i class="fas fa-trash"></i></button><br><br>');
+        $ligneFormLi.append($removeFormButton);
+
+        $removeFormButton.on('click', function(e) {
+            // remove the li for the ligne form
+            $ligneFormLi.remove();
+        });
+    }
+
+</script>
+
+<!-- Embed Collection -->
+{% endblock %}

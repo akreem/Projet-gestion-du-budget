@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<title>طلب أسعار عدد {{ devisVierge.num }} </title>
+
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td, th {
+
+            border: 1px solid black;
+            text-align: right;
+            padding: 8px;
+        }
+        h4
+        {
+            margin: 0px;
+        }
+        h1
+        {
+            margin: 18px;
+        }
+    </style>
+</head>
+{% block body %}
+<body>
+<div  style="float: left;">
+    <h4>مدرسة الإختصاصات الجوية بصفاقس</h4>
+    <h4 style="text-align: right">(74) 274 750  : الهـاتف</h4>
+    <h4 style="text-align: right">(74) 274 399 : الفـاكس</h4>
+    <h4 style="text-align: right"> 15207   مكتـب رقـم</h4>
+
+
+</div>
+
+<div  style="float: right;">
+    <h4> الجمهوريــــــــــة التونسيــــــــة  </h4>
+    <h4> وزارة الدفــــــــــــاع الوطنــــــي  </h4>
+    <h4> جيـــــــــــــــش الطيــــــــــــــران</h4>
+    <h4> مدرســة الأختصــاصـات الجـوية</h4>
+
+    <h4>  العنوان:طريق سكرة حي الحبيب </h4>
+
+    <h4 dir="rtl">   <center>  3052  صفــــــــاقـــــس  </center> </h4>
+
+
+</div>
+
+<br>
+<br>
+<br><br>
+<br>
+<br>
+
+
+
+
+
+<div style="text-align: center;">
+
+    <h1 style="margin: 0px;"  >طلـب أسعـــار</h1>
+    <h1>عـــــدد {{ devisVierge.year }}/{{ devisVierge.num }}  </h1>
+
+
+
+
+
+</div>
+
+<br>
+<br>
+
+
+
+<table style="width:100%">
+    <tr >
+        <th  style="text-align: center">خاص بالــمزود</th>
+        <th  style="text-align: center">خاص بالادارة</th>
+
+    </tr>
+    <tr >    <td dir="rtl" style="text-align: right; width: 50%">  اسم و عنوان العارض:.........................................................<br>
+            المعرف الجبائي:................................................................<br>
+            الهاتف:................................
+            الفاكس:................................. <br>
+
+            اتعهـــد بتســـليم المــــواد المطلوبـــة فــي أجـــل أقصـــاه......... يومــا<br> بداية من تاريخ تسلم وصل طلـب.<br>
+            مدة صلوحية العرض :...................
+            <br><center>................... في :......................</center>
+            <br><center> الإمضــاء والختـم</center>
+            <br>
+            <br>
+            <br>
+            <br>
+
+        </td>
+        <td style="text-align: right;"><p>أتشـرف بأن أطلــب منكـم تقديـم أحسـن عروضـكم لاحتمــال تزويــد
+
+                <br>.مدرســة الإختصـاصــات الجويــة بالــمواد المذكــورة بالــجدول</p>
+
+
+            المطلوب منكم تكملة هذا الطلب وإرساله في ظرف مغلق ومختوم<br>
+            قبل يوم
+            <b> {{ devisVierge.DateLimite | date('Y/m/d')  }}</b>
+<br>
+
+            <br><center>........................: صفاقس في</center>
+            <br><center> الآمـر</center>
+            <br>
+            <br>
+            <br>
+            <br>
+        </td>
+
+
+    </tr>
+</table>
+<p style="text-align: right;">
+    <b>: يشرفنـا أن نطلـب منـكم مدّ مدرســة الإختصـاصــات الجويــة بصفــاقس بأسعــار المـواد المدرجـة بالـجدول التالــي</b></p>
+<div class="table-responsive">
+
+<table dir="rtl" class="table table-bordered" width="100%" cellspacing="0">
+    <tr>
+        <th style="text-align: right;">ع/ر</th>
+        <th><center>بيان المواد المطلوبة</center></th>
+
+        <th><center>الكمية</center></th>
+        <th><center>TVA</center></th>
+        <th><center>PU HT</center></th>
+        <th><center>Total HT</center></th>
+
+    </tr>
+
+                <tbody>
+
+                {% for i,l in lignedevis %}
+
+
+
+
+        <tr>
+        <td> {{ i+1 }}</td>
+        <td> {{ l.produit }}</td>
+        <td> {{ l.quantite}}</td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+
+            {% endfor %}
+    </tr>
+
+    <tr>
+        <td colspan="5"><b>المجموع دون احتساب الاداءات:</b></td>
+        <td> </td>
+    </tr>
+    <tr>
+        <td colspan="5"><b>الأداء على القيمة المضافة:</b></td>
+        <td> </td>
+    </tr>
+    <tr>
+        <td colspan="5"><b>المجموع باحتساب الاداءات:</b></td>
+        <td> </td>
+    </tr>
+    </tbody>
+
+
+</table>
+</div>
+
+<p dir="rtl"><b>ملاحظة:</b></p>
+<p dir="rtl">- يجب ألا يحمل طلب الأسعار أي تشطيب .<br>
+    - يرجى ارفاق عرضكم بدليل اشهاري أو وثيقة تحمل مواصفات و خصائص المواد المعروضة . <br>
+    - يجب ألا تتجاوز اجال التسليم الشهرين.
+    <br>- يمكن للإدارة إختيار البضاعة والمواد فصلا فصلا مع إمكانية الزيادة أو التخفيض في الكميات المقترحة.</p>
+</body>
+
+{% endblock %}
+
+
+
+

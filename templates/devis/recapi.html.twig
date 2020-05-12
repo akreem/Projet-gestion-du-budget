@@ -1,0 +1,145 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Hello TaskController!{% endblock %}
+
+{% block body %}
+<head>
+    <title>
+        جـدول حوصـلــة الاثـمـــان
+
+    </title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+
+        th,td {
+            border: 1px solid black;
+            text-align: center;
+            padding: 8px;
+
+        }
+
+
+        h4
+        {
+            margin:0px ;
+
+
+
+        }
+        h2{
+            margin:0px ;
+        }
+
+
+    </style>
+</head>
+
+<body>
+<h5 class="text-gray-900 text-center font-weight-bold my-1">
+    جـدول حوصـلــة الاثـمـــان
+    <br>
+    السنــة المـاليــة : <b style="color: #ff253a">{{ "now"|date("Y") }}</b>
+    <br>
+    عـنـــوان الفصـل : تـاثيـــث الادارة
+    <br>
+    التبـويــب : 02-201-05-001
+
+</h5>
+<div class="card-body">
+    <div class="table-responsive">
+
+        <table class="table table-sm  table-hover table-warning mb-0" width="100%" cellspacing="0" dir="rtl">
+        <thead class="text-gray-900 text-center font-weight-bold">
+
+        <tr>
+
+            <th rowspan="3" >ع/ر	</th>
+
+            <th rowspan="3">المواد المطلوبة	</th>
+        </tr>
+
+        <tr>
+
+                <th>الكمية</th>
+                <th>السعر الفردي</th>
+            <th>TVA</th>
+            <th>المجموع</th>
+            <th>المزود</th>
+            <th></th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+
+{% set a=0 %}
+{% set b=0 %}
+        {% for k,l in tr.ligneRecaps %}
+        <tr>
+            <td >{{ k+1 }}</td>
+            <td > <h5>{{ l.produit }}</h5></td>
+
+            {% set b=b+1 %}
+
+
+                    <td> {{ l.quantite }}</td>
+                    <td>{{ l.puHt }}</td>
+                    <td>{{ l.tva }}</td>
+                    <td>{{ l.totalHt }}</td>
+                    <td>{{ l.nomFournisseur}}</td>
+
+
+            {% set a=a+l.LigneDevis.devis.id %}
+
+
+            <td> <a href="{{ path('BonCommande_PDF',{'id':l.id}) }}"target="_blank"class="btn btn-primary btn-rectangle">طلـب تزود </a>
+                <a href="{{ path('TabRecapF_PDF',{'id':tr.id}) }}"target="_blank"class="btn btn-success btn-rectangle">
+                            <i class="fas fa-download "></i> </a>
+               </td>
+        <tr>
+
+     {% endfor %}
+
+
+
+
+        <tr class="text-dark">
+            <td colspan="2" style="text-align: right" >
+                <b>المجموع دون احتساب الاداءات:</b></td>
+                <td colspan="5" > {{ tr.Totalht }}  </td>
+        </tr>
+        <tr class="text-dark">
+            <td colspan="2" style="text-align: right" >
+                <b>الأداء على القيمة المضافة:</b></td>
+
+                <td colspan="5">{{ tr.Totaltva }}</td>
+
+        </tr>
+        <tr class="text-dark">
+            <td colspan="2" style="text-align: right"  ><b>المجموع باحتساب الاداءات:</b></td>
+                <td colspan="5">{{ tr.Totalttc }}</td>
+        </tr>
+        <tr>
+
+
+    <td colspan="10"><a href="{{ path('TabRecapF_PDF',{'id':tr.id}) }}"target="_blank"class="btn btn-danger btn-rectangle">
+            <i class="fas fa-download "> تحميل جدول الحوصلــة </i> </a>
+        <a href="{{ path('BonCommandeFournisseur_PDF',{'id':tr.id}) }}"target="_blank"class="btn btn-primary btn-rectangle">
+            <i class="fas fa-download "> تحميل طلــب تــــزود </i> </a>
+    <td colspan="10"></td></tr>
+
+
+        </tbody>
+    </table>
+
+    </div>
+</div>
+</body>
+{% endblock %}
+
+

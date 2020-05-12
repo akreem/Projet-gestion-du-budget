@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        جـدول حوصـلــة الاثـمـــان
+
+    </title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+
+        th,td {
+            border: 1px solid black;
+            text-align: center;
+            padding: 8px;
+
+        }
+
+
+        h4
+        {
+            margin:0px ;
+
+
+
+        }
+        h2{
+            margin:0px ;
+        }
+
+
+    </style>
+
+
+
+</head>
+
+<body>
+<div >
+    <div>
+        <div  style="float: left; " >
+            <h4>.......................صفاقس في </h4>
+
+        </div>
+
+        <div  style="float: right;">
+            <h4> الجمهوريــــــــــة التونسيــــــــة  </h4>
+            <h4> وزارة الدفــــــــــــاع الوطنــــــي  </h4>
+            <h4> جيـــــــــــــــش الطيــــــــــــــران</h4>
+            <h4> مدرســة الأختصــاصـات الجـوية</h4>
+
+
+        </div>
+        <br>
+        <br><br>
+        <br><br>
+        <div style="text-align: center;">
+            <h2  style="margin-bottom: 12px"  >جـدول حوصـلــة الأثـمـــان</h2>
+            <h4 dir="rtl">المـزود: {{ tr.nomFournisseur }}</h4>
+            <h4> السنــة المـاليــة : {{ "now"|date("Y") }} </h4>
+            <h4>عـنـــوان الفصـل : تـاثيـــث الادارة </h4>
+            <h4> التبـويــب : 02-201-05-001</h4>
+        </div>
+        <br>
+        <br>
+
+    </div>
+    <table class="table table-bordered" width="100%" cellspacing="0" dir="rtl">
+        <thead>
+
+        <tr>
+
+            <th rowspan="3">ع/ر	</th>
+            <th rowspan="3">المواد المطلوبة	</th>
+            <th rowspan="3">الكمية</th>
+            <th rowspan="3">TVA</th>
+            <th colspan="4" style="background-color: #e1faea">
+                {{ tr.nomFournisseur }}
+            </th>
+        </tr>
+        <tr>
+            <th>السعر الفردي</th>
+            <th>المجموع</th>
+        </tr>
+
+        </thead>
+        <tbody>
+        <tr>
+            {% for k,l in tr.ligneRecaps %}
+        <tr>
+            <td>{{ k+1 }}</td>
+            <td>{{ l.produit }}</td>
+
+            <td> {{ l.quantite }}</td>
+            <td>{{ l.tva }}</td>
+            <td>{{ l.puHt }}</td>
+            <td>{{ l.totalHt }}</td>
+        <tr>
+
+
+            {% endfor %}
+        <tr>
+
+
+
+        <tr>
+            <td colspan="2" style="text-align: right"><b>المجموع دون احتساب الاداءات:</b></td>
+            <td colspan="5" > {{ tr.totalHt }}  </td>
+
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: right" > <b>الأداء على القيمة المضافة:</b></td>
+
+            <td colspan="5">{{ tr.Totaltva }}</td>
+
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: right" ><b>المجموع باحتساب الاداءات:</b></td>
+            <td colspan="5">{{ tr.Totalttc }}</td>
+
+        </tr>
+        </tbody>
+    </table>
+
+
+
+
+
+</div>
+</body>
+
+
+</html>
+
+

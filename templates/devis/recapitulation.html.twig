@@ -1,0 +1,156 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}Hello TaskController!{% endblock %}
+
+{% block body %}
+    <title>
+        جـدول مقــارنة الاثـمـــان
+    </title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+
+        th,td {
+            border: 1px solid black;
+            text-align: center;
+            padding: 8px;
+
+        }
+
+
+        h4
+        {
+            margin:0px ;
+
+
+
+        }
+        h2{
+            margin:0px ;
+        }
+
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+    <head>
+
+        <!-- Custom styles for this page -->
+        <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    </head>
+
+    <body>
+
+
+    <h5 class="text-gray-900 text-center font-weight-bold my-1">
+        جـدول مقـــارنة الاثـمـــان
+<br>
+
+        السنــة المـاليــة : <b style="color: #ff253a">{{ "now"|date("Y") }}</b>
+        <br>
+        عـنـــوان الفصـل : تـاثيـــث الادارة
+        <br>
+        التبـويــب : 02-201-05-001
+
+    </h5>
+            <div class="card-body">
+
+                <div class="table-responsive">
+
+                    <table class="table table-sm table-hover table-warning mb-0" width="100%" cellspacing="0" dir="rtl">
+                        <thead class="text-dark">
+
+                        <tr>
+
+                            <th rowspan="3" >ع/ر	</th>
+
+                            <th rowspan="3" >المواد المطلوبة	</th>
+                            <th colspan="100" >عروض مختلف المزودين</th>
+                        </tr>
+                        <tr>
+                            {% for d in dv.devis %}
+                                <th colspan="5" >{{ d.nomFournisseur }}
+                                    <a  href="{{ path('RecapParFournisseur',{'id':d.id}) }}"
+                                        class="delete"
+                                        data-confirm="Are you sure to Add this item?">
+                                        <img class="img-profile" src="/img/plus2.png" style="width:32px;height:32px;margin-right: 10px"/></a>
+                                </th>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            {% set nbdv = dv.devis|length - 1%}
+                            {% for i in 1..dv.devis|length %}
+                                <th>الكمية</th>
+                                <th>السعر الفردي</th>
+                                <th>TVA</th>
+                                <th>المجموع</th>
+                                <th></th>
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for k,l in dv.ligneDevisVierges %}
+                        <tr>
+                            <td>{{ k+1 }}</td>
+                            <td>{{ l.produit }}</td>
+                            {% for d in dv.devis %}
+                                {% if d.ligneDevis[k].puHt == 0 %}
+                                    <td colspan="5"></td>
+
+                                {% else %}
+                                    <td> {{ d.ligneDevis[k].quantite }}</td>
+                                    <td>{{ d.ligneDevis[k].puHt }}</td>
+                                    <td>{{ d.ligneDevis[k].tva }}</td>
+                                    <td>{{ d.ligneDevis[k].totalHt }}</td>
+                                    <td dir="rtl"><a  href="{{ path('RecapParArticle',{'id':d.ligneDevis[k].id}) }}"
+                                                      class="delete"
+                                                      data-confirm="Are you sure to Add this item?">
+                                            <img class="img-profile rounded-circle"  src="/img/plus.png" /></a>
+                                    </td>
+
+                                {% endif %}
+
+                            {% endfor %}
+                        <tr>
+
+
+                            {% endfor %}
+
+                        <tr class="text-dark">
+                            <td colspan="2" style="text-align: right;"><b>المجموع دون احتساب الاداءات:</b></td>
+                            {% for d in dv.devis %}
+                                <td colspan="5" > {{ d.TotalHT }}  </td>
+                            {% endfor %}
+
+                        </tr>
+                        <tr class="text-dark">
+                            <td colspan="2" style="text-align: right" > <b>الأداء على القيمة المضافة:</b></td>
+                            {% for d in dv.devis %}
+
+                                <td colspan="5">{{ d.TotalTva }}</td>
+                            {% endfor %}
+
+                        </tr>
+                        <tr class="text-dark">
+                            <td colspan="2" style="text-align: right" ><b>المجموع باحتساب الاداءات:</b></td>
+                            {% for d in dv.devis %}
+                                <td colspan="5">{{ d.TotalTtc }}</td>
+
+                            {% endfor %}
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+    </body>
+{% endblock %}
+
+
+

@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+            {% block body %}
+
+
+            <html>
+            <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+                <title>
+                    devis
+                </title>
+
+                <style>
+                    table {
+                        direction: rtl;
+
+                        font-family: arial, sans-serif;
+                        border-collapse: collapse;
+                        width: 100%;
+                    }
+
+
+                    th,td {
+
+                        border: 1px solid black;
+                        text-align: center;
+                        padding: 8px;
+
+                    }
+
+
+                    h4
+                    {
+                        margin:0px ;
+
+
+
+                    }
+                    h2{
+                        margin:0px ;
+                    }
+
+
+                </style></head>
+
+
+            <body>
+            <div>
+                <div style="text-align: right" class="col-10">
+
+                <a href="{{ path('Imprimerbudget',{'id':budget.id}) }}" target="_blank"
+                   class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
+                    <i class="fas fa-print fa-sm text-white-50">
+
+                    </i> طبــاعـة</a>
+                </div>
+                <h5 class="text-gray-900 text-center font-weight-bold my-1">
+                     مــدرســة الإختصــــــاصات الــجويــة
+                    <br>
+
+
+                    وضعية الميزانية الذاتية -العنوان الأول- لسنة <b style="color: #ff253a">{{ budget.annee }}</b>
+                    <br>
+                    {{ budget.date |date('Y/m/d') }}  بتــاريخ <br>
+
+                </h5>
+
+                <br>
+
+                <div class="card-body">
+
+                    <div class="table-responsive">
+
+                        <table class="table table-sm table-hover table-warning mb-0" width="100%" cellspacing="0" dir="rtl">
+
+                            <thead class="text-dark">
+
+                    <tr>
+                        <th> العنوان</th>
+                        <th> التبويب</th>
+                        <th> عنوان الفصل بالميزانية</th>
+                        <th> المبلغ المرصود بالدينار</th>
+                        <th> الإعتمادات المتعهد بها وغير المدفوعة</th>
+                        <th> الإعتمادات المتعهد بها المدفوعة</th>
+                        <th> المبلغ المتبقي</th>
+
+                    </tr>
+                            </thead>
+                            <tbody>
+                            {% for l in budget.rubriques %}
+                    <tr rowspan="2">
+                        <td ><b>العنوان الأول</b></td>
+
+                        <td>{{ l.code }}</td>
+                        <td>{{ l.titre }}</td>
+                        <td>{{ l.montant }}</td>
+                        <td>{{ l.engagementnpaye }}</td>
+                        <td>{{ l.engagementpaye }}</td>
+                        <td>{{ l.montant-l.engagementnpaye-l.engagementpaye }}</td>
+
+                    </tr>
+                            {% endfor %}
+                    <tr class="text-dark">
+                        <td colspan="3" rowspan="2" style="text-align: left;"><b>الجملـــة:</b></td>
+                        <td rowspan="2">{{ budget.totalht }}</td>
+
+                        <td rowspan="2" >{{ budget.totalnpaye }}</td>
+                        <td rowspan="2">{{ budget.totalpaye }}</td>
+                        <td rowspan="2">{{ budget.totalht-budget.totalnpaye-budget.totalpaye }}</td>
+                    </tr>
+
+
+
+
+
+                    </tbody>
+                        </table>
+
+</div></div></div>
+            {% endblock %}

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+
+            جـدول مقــارنة الاثـمـــانPDF
+
+    </title>
+</head>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+
+    th,td {
+        border: 1px solid black;
+        text-align: center;
+        padding: 8px;
+
+    }
+
+
+    h4
+    {
+        margin:0px ;
+
+
+
+    }
+    h2{
+        margin:0px ;
+    }
+</style>
+
+<body>
+<div>
+    <div  style="float: left; " >
+        <h4>.......................صفاقس في </h4>
+
+    </div>
+
+    <div  style="float: right;">
+        <h4> الجمهوريــــــــــة التونسيــــــــة  </h4>
+        <h4> وزارة الدفــــــــــــاع الوطنــــــي  </h4>
+        <h4> جيـــــــــــــــش الطيــــــــــــــران</h4>
+        <h4> مدرســة الأختصــاصـات الجـوية</h4>
+
+
+    </div>
+    <br>
+    <br><br>
+  <br>
+
+    <div style="text-align: center;">
+        <h2  style="margin-bottom: 12px"  >جـدول مقــارنة الاثـمـــان</h2>
+        <h4>  السنــة المـاليــة : {{ "now"|date("Y") }}</h4>
+        <h4>عـنـــوان الفصـل : تـاثيـــث الادارة </h4>
+        <h4> التبـويــب : 02-201-05-001</h4>
+    </div>
+    <br>
+    <br>
+
+
+</div>
+
+    <table class="table table-bordered" width="100%" cellspacing="0" dir="rtl">
+        <thead>
+
+        <tr>
+
+            <th rowspan="3">ع/ر	</th>
+
+            <th rowspan="3">المواد المطلوبة	</th>
+            <th colspan="100" style="background-color: #b7c7f2">عروض مختلف المزودين</th>
+        </tr>
+        <tr>
+            {% for d in dv.devis %}
+                <th colspan="4" style="background-color: #e1faea">{{ d.nomFournisseur }}</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% set nbdv = dv.devis|length - 1%}
+            {% for i in 1..dv.devis|length %}
+                <th>الكمية</th>
+                <th>السعر الفردي</th>
+                <th>TVA</th>
+                <th>المجموع</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for k,l in dv.ligneDevisVierges %}
+            <tr>
+                <td>{{ k+1 }}</td>
+                <td>{{ l.produit }}</td>
+                {% for d in dv.devis %}
+                    {% if d.ligneDevis[k].puHt == 0 %}
+                        <td colspan="4"></td>
+
+                    {% else %}
+                        <td> {{ d.ligneDevis[k].quantite }}</td>
+                        <td>{{ d.ligneDevis[k].puHt }}</td>
+                        <td>{{ d.ligneDevis[k].tva }}</td>
+                        <td>{{ d.ligneDevis[k].totalHt }}</td>
+
+                    {% endif %}
+
+
+                {% endfor %}
+        <tr>
+
+
+        {% endfor %}
+
+        <tr>
+            <td colspan="2" style="text-align: right"><b>المجموع دون احتساب الاداءات:</b></td>
+            {% for d in dv.devis %}
+                <td colspan="4" > {{ d.TotalHT }}  </td>
+            {% endfor %}
+
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: right" > <b>الأداء على القيمة المضافة:</b></td>
+            {% for d in dv.devis %}
+
+                <td colspan="4">{{ d.TotalTva }}</td>
+            {% endfor %}
+
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: right" ><b>المجموع باحتساب الاداءات:</b></td>
+            {% for d in dv.devis %}
+                <td colspan="4">{{ d.TotalTtc }}</td>
+
+            {% endfor %}
+
+        </tr>
+        </tbody>
+    </table>
+   {# <table class="table table-bordered" width="100%" cellspacing="0" dir="rtl">
+
+        <style>td { text-align: right;}</style>
+        <tr>
+            <th rowspan="3">ع/ر</th>
+            <th rowspan="3" >المواد المطلوبة</th>
+            <th rowspan="3">الكمية</th>
+            <th rowspan="3" >TVA</th>
+            <th colspan="6" > عروض مختلف المزودين </th>
+        </tr>
+
+
+        <tr>        {% for d in devis %}
+
+            <td colspan="2" style="text-align: center;"><b>{{ d.NomFournisseur }}</b> </td>
+            {% endfor %}
+        </tr>
+
+
+
+        <tr>
+            <td  style="text-align: center;"><b>السعر الفردي</b> </td>
+            <td style="text-align: center;"><b> المجموع</b> </td>
+            <td style="text-align: center;"><b> السعر الفردي</b></td>
+            <td style="text-align: center;"><b> المجموع</b> </td>
+            <td style="text-align: center;"><b> السعر الفردي</b></td>
+            <td style="text-align: center;"><b> المجموع</b> </td>
+
+        </tr>
+
+        {% for i,ld in lignedevis %}
+
+        <tr>
+            <td>{{ i+1 }}</td>
+            <td>{{ ld.produit }}</td>
+            <td>{{ ld.quantite}}</td>
+            <td>{{ ld.tva }}</td>
+            <td>{{ ld.PuHt}}</td>
+            <td>{{ ld.TotalHt }}</td>
+            <td>{{ ld.devis}}</td>
+
+        </tr>
+          {% endfor %}
+
+
+        <tr >
+            <td colspan="5"><b>المجموع دون احتساب الاداءات:</b></td>
+            {% for d in devis %}
+                <td> {{ d.TotalHT }}  </td>
+                <td></td>
+            {% endfor %}
+
+        </tr>
+        <tr>
+            <td colspan="5"> <b>الأداء على القيمة المضافة:</b></td>
+            {% for d in devis %}
+
+                <td>{{ d.TotalTva }}</td>
+                <td></td>
+            {% endfor %}
+
+        </tr>
+        <tr>
+            <td colspan="5"><b>المجموع باحتساب الاداءات:</b></td>
+            {% for d in devis %}
+                <td>{{ d.TotalTtc }}</td>
+                <td></td>
+            {% endfor %}
+
+        </tr>
+
+</table>#}
+
+<br>
+<br>
+<br>
+
+
+    <h4> العقـــيد حمــودة بسـيس امـر الصـرف<br>
+        بـمــدرسة الاخـتـصـــاصـات الـجـويـــة </h4>
+<br><br><br><br><br>
+
+
+
+
+</body>
+</html>
+{#
+{% block body %}
+
+                        طلـب أسعـار عـدد
+                        <b style="color: #ff253a">{{ devisVierge.Year }}/{{ devisVierge.num }}</b></h2>
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered" width="100%" cellspacing="0" >
+                                    <thead style="background-color: #4e73df;opacity: 0.9; color: #FFFFFF";>
+
+                                    <tr role="row">
+                                        <th></th>
+                                        <th>Produit</th>
+                                        <th>Quantite</th>
+                                        <th>TVA</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for i,ld in lignedevis %}
+
+                                        <tr>
+                                            <td>{{ i+1 }}</td>
+                                            <td>{{ ld.produit }}</td>
+                                            <td>{{ ld.quantite}}</td>
+                                            <td>{{ ld.tva }}</td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div></div></div></div>
+#}
+
+

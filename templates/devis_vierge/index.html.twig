@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello!{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+
+    </style>
+
+    <body>
+
+    <fieldset class="container">
+        <div class="col-md-15">
+            <div class="card shadow-lg border-0 rounded-lg mt-1">
+                <div class="card-header border-bottom-success " >
+                    <h3  class="text-gray-900 text-center font-weight-bold my-4">Ajouter  Devis Vierge :
+                    </h3>
+                </div>
+                <div class="card-body ">
+                    {{ form_start(form) }}
+                    <div class="col-md-13">
+                        <fieldset class=" card-header border-bottom-primary border-left-primary" >
+                        <div class="row">
+
+                            <div class="col">
+
+                        <div class="form-group">
+                            <div class="m-0 font-weight-bold text-primary">
+                                {{ form_label(form.date_edition,'Date édition') }}
+                            </div>
+                            {{ form_widget(form.date_edition) }}
+                        </div>
+                            </div>
+                            <div class="col">
+
+
+                        <div class="form-group">
+                            <div class="m-0 font-weight-bold text-primary">
+                                {{ form_label(form.date_limite) }}
+                            </div>
+                            {{ form_widget(form.date_limite) }}
+                        </div>
+                            </div>
+
+
+                        <div class="form-group">
+                            <div class="m-0 font-weight-bold text-primary">
+                                {{ form_label(form.nb_devis_edit,'Nombre Devis Editèes') }}
+                            </div>
+                            {{ form_widget(form.nb_devis_edit,
+                                {'attr': {'class': 'form-control form-control-sm','value' :'3','min' : 0,}}) }}
+                        </div></div>
+    </fieldset>
+<br>
+                        <fieldset class=" card-header border-bottom-danger border-left-danger" >
+                        <h3>Lignes Devis</h3>
+                            <br>
+
+                            <ol   class="tags" data-prototype="{{ form_widget(form.ligneDevisVierges.vars.prototype)|e('html_attr') }}">
+                                {% for l in form.ligneDevisVierges %}
+                              <li class="row">
+                                {{ form_label(l.produit) }}
+                                {{ form_widget(l.produit) }}
+
+                                {{ form_label(l.quantite) }}
+                                {{ form_widget(l.quantite) }}
+
+                              </li>
+                            {% endfor %}
+                        </ol>
+
+                        </fieldset>
+                        <br>
+                        <button class="btn btn-primary btn-block" type="submit">Valider</button>
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- Embed Collection -->
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('embed.js') }}"></script>
+
+    <!-- Embed Collection -->
+
+   {#
+   <script
+            src="{{ asset('jquery-2.2.4.min') }}"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous">
+
+    </script>
+    #}
+
+    </body>
+{% endblock %}

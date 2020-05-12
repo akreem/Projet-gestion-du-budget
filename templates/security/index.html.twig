@@ -1,0 +1,107 @@
+{% block body %}
+    <title>Login</title>
+
+    <style>
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+        .error {color:red}
+    </style>
+
+    <link href="css/styles.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+
+
+
+  {% if not app.user %}
+        <body class="bg-primary">
+
+
+        <div id="layoutAuthentication">
+            <div id="layoutAuthentication_content">
+
+                <main>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5">
+                                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                                    <div class="card-body">
+                                        <form  action="{{ path('login') }}" method="POST">
+                                            <div class="form-group">
+
+                                                <label class="small mb-1" for="_username">Username</label>
+                                                <input class="form-control py-4 "
+                                                       name="_username"
+                                                       type="text"
+                                                       value="{{ last_username }}"
+                                                       placeholder="Enter Username"
+                                                       required
+                                                       autofocus>
+
+                                                {% if error %}
+                                                    <span class="error">{{ error.messageKey }}</span>
+                                                {% endif %}
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="_password">Password</label>
+                                                <input class="form-control py-4"
+                                                       name="_password"
+                                                       type="password"
+                                                       placeholder="Enter password" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                            </div>
+                                            <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                                <button class="btn btn-primary btn-block" type="submit">Login</button></div>
+                                        </form>
+                                    </div>
+                                    <div class="card-footer text-center">
+                                        <div class="small"><a href="{{ path('signup') }}">Need an account? Sign up!</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+
+            </div>
+
+            <div id="layoutAuthentication_footer">
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Akram Issaoui 2020</div>
+                            <div>
+
+                                <div class="text-muted" > DateTime :
+                                    {{ "now"|date("H:i | d,  F Y") }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+
+
+    {% else %}
+        <br>
+        <div id="layoutError_content">
+            <main>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6">
+                            <div class="text-center mt-4">
+                                <img class="mb-4 img-error" src="/img/error-404-monochrome.svg" />
+                                <p class="lead">Oops..You are Already Logged In ♥</p>
+                                <a href="{{ path('menu') }}"><i class="fas fa-arrow-left mr-1"></i>Return to Dashboard</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        </body>
+    {% endif %}
+{% endblock %}

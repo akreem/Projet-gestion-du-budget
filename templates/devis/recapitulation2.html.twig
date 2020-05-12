@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        جـدول مقــارنة الاثـمـــان
+
+    </title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+
+        th,td {
+            border: 1px solid black;
+            text-align: center;
+            padding: 8px;
+
+        }
+
+
+        h4
+        {
+            margin:0px ;
+
+
+
+        }
+        h2{
+            margin:0px ;
+        }
+
+
+    </style>
+
+
+
+</head>
+
+<body>
+<div style=" margin-top: 20px;
+  margin-bottom: 100px;
+  margin-right: 150px;
+  margin-left: 80px;">
+    <div>
+        <div style="text-align: center;">
+            <h2  style="margin-bottom: 12px"  >جـدول حوصـلــة الأثـمـــان</h2>
+            <h4 dir="rtl">المـزود: {{ devis.nomFournisseur }}</h4>
+            <h4> السنــة المـاليــة: {{ "now"|date("Y") }} </h4>
+            <h4>عـنـــوان الفصـل : تـاثيـــث الادارة </h4>
+            <h4> التبـويــب : 02-201-05-001</h4>
+        </div>
+        <br>
+        <br>
+
+    </div>
+    <table class="table table-bordered" width="100%" cellspacing="0" dir="rtl">
+        <thead>
+
+        <tr>
+
+            <th rowspan="3">ع/ر	</th>
+            <th rowspan="3">المواد المطلوبة	</th>
+            <th rowspan="3">الكمية</th>
+            <th rowspan="3">TVA</th>
+            <th colspan="4" style="background-color: #e1faea">
+                {{ devis.nomFournisseur }}
+            </th>
+        </tr>
+        <tr>
+            <th>السعر الفردي</th>
+            <th>المجموع</th>
+        </tr>
+
+        </thead>
+        <tbody>
+        {% for k,l in devis.ligneDevis %}
+
+        <tr>
+            <td>{{ k+1 }}</td>
+            <td>{{ l.produit }}</td>
+
+            {% if l.puHt == 0 %}
+                <td colspan="5"></td>
+
+            {% else %}
+                <td> {{ l.quantite }}</td>
+                <td>{{ l.tva }}</td>
+                <td>{{ l.puHt }}</td>
+                <td>{{ l.totalHt }}</td>
+
+            {% endif %}
+            {% endfor %}
+
+
+        <tr>
+
+
+
+        <tr>
+            <td colspan="2" style="text-align: right"><b>المجموع دون احتساب الاداءات:</b></td>
+            <td colspan="5" > {{ devis.TotalHT }}  </td>
+
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: right" > <b>الأداء على القيمة المضافة:</b></td>
+
+            <td colspan="5">{{ devis.TotalTva }}</td>
+
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: right" ><b>المجموع باحتساب الاداءات:</b></td>
+            <td colspan="5">{{ devis.TotalTtc }}</td>
+
+        </tr>
+        </tbody>
+    </table>
+
+
+
+</div>
+</body>
+
+
+</html>
+
+
+
