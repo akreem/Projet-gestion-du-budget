@@ -3,6 +3,8 @@
 {% block title %}Hello!{% endblock %}
 
 {% block body %}
+    <title>Ajouter Devis Vierge</title>
+
     <style>
         .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
         .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
@@ -23,39 +25,35 @@
                     <div class="col-md-13">
                         <fieldset class=" card-header border-bottom-primary border-left-primary" >
                         <div class="row">
-
-                            <div class="col">
-
-                        <div class="form-group">
-                            <div class="m-0 font-weight-bold text-primary">
-                                {{ form_label(form.date_edition,'Date édition') }}
-                            </div>
-                            {{ form_widget(form.date_edition) }}
-                        </div>
-                            </div>
-                            <div class="col">
-
-
-                        <div class="form-group">
+                        <div class="col form-group">
                             <div class="m-0 font-weight-bold text-primary">
                                 {{ form_label(form.date_limite) }}
                             </div>
                             {{ form_widget(form.date_limite) }}
                         </div>
+
+                        <div class="col form-group">
+                            <div class="m-0 font-weight-bold text-primary">
+                                {{ form_label(form.rubrique,'Rubrique') }}
                             </div>
+                            {{ form_widget(form.rubrique,
+                                {'attr': {'class': 'form-control form-control-sm','placeholder':'Entrer Rubrique'}}) }}
+                        </div>
 
-
-                        <div class="form-group">
+                            <div class=" col form-group">
                             <div class="m-0 font-weight-bold text-primary">
                                 {{ form_label(form.nb_devis_edit,'Nombre Devis Editèes') }}
                             </div>
                             {{ form_widget(form.nb_devis_edit,
                                 {'attr': {'class': 'form-control form-control-sm','value' :'3','min' : 0,}}) }}
-                        </div></div>
+                            </div>
+                        </div>
+
     </fieldset>
+
 <br>
-                        <fieldset class=" card-header border-bottom-danger border-left-danger" >
-                        <h3>Lignes Devis</h3>
+                        <fieldset class=" card-header border-bottom-dark border-left-dark" >
+                            <h5  style="color: red;text-align: right"><b>Lignes Devis</b></h5>
                             <br>
 
                             <ol   class="tags" data-prototype="{{ form_widget(form.ligneDevisVierges.vars.prototype)|e('html_attr') }}">
@@ -70,14 +68,33 @@
                               </li>
                             {% endfor %}
                         </ol>
+                            <br>
+                            <a  href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#submitModal">Valider</a>
 
-                        </fieldset>
-                        <br>
-                        <button class="btn btn-primary btn-block" type="submit">Valider</button>
-                    </div>
 
                     {{ form_end(form) }}
+                        </fieldset>
+
+                    <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog " role="document">
+                            <div class="modal-content">
+                                <div class="modal-header modal-colored-header bg-primary">
+                                    <h5 class="modal-title text-white" id="exampleModalLabel">Demande de confirmation</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span class="text-white" aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">Êtes-vous sûr de vouloir continuer ?</div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+                                    <button class="btn btn-primary" type="submit">Valider</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end-->
                 </div>
+
             </div>
         </div>
     </fieldset>
@@ -88,14 +105,9 @@
 
     <!-- Embed Collection -->
 
-   {#
-   <script
-            src="{{ asset('jquery-2.2.4.min') }}"
-            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-            crossorigin="anonymous">
 
-    </script>
-    #}
+
+
 
     </body>
 {% endblock %}

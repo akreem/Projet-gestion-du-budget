@@ -47,7 +47,7 @@
     <br>
     عـنـــوان الفصـل : تـاثيـــث الادارة
     <br>
-    التبـويــب : 02-201-05-001
+    <b dir="ltr" style="color: #ff253a">{{ tr.devis.rubrique }}</b> : التبـويــب
 
 </h5>
 <div class="card-body">
@@ -65,13 +65,12 @@
 
         <tr>
 
-                <th>الكمية</th>
-                <th>السعر الفردي</th>
-            <th>TVA</th>
-            <th>المجموع</th>
+            <th>الكمية</th>
+            <th>السعر الفردي</th>
+            <th>(%)TVA</th>
+            <th>الأداء على القيمة المضافة</th>
+            <th>المجموع دون احتساب الاداءات</th>
             <th>المزود</th>
-            <th></th>
-
 
         </tr>
         </thead>
@@ -89,18 +88,14 @@
 
                     <td> {{ l.quantite }}</td>
                     <td>{{ l.puHt }}</td>
-                    <td>{{ l.tva }}</td>
+                    <td>{{ l.tva }}%</td>
+                    <td>{{ l.montanttva }}</td>
                     <td>{{ l.totalHt }}</td>
                     <td>{{ l.nomFournisseur}}</td>
 
 
             {% set a=a+l.LigneDevis.devis.id %}
 
-
-            <td> <a href="{{ path('BonCommande_PDF',{'id':l.id}) }}"target="_blank"class="btn btn-primary btn-rectangle">طلـب تزود </a>
-                <a href="{{ path('TabRecapF_PDF',{'id':tr.id}) }}"target="_blank"class="btn btn-success btn-rectangle">
-                            <i class="fas fa-download "></i> </a>
-               </td>
         <tr>
 
      {% endfor %}
@@ -111,27 +106,33 @@
         <tr class="text-dark">
             <td colspan="2" style="text-align: right" >
                 <b>المجموع دون احتساب الاداءات:</b></td>
-                <td colspan="5" > {{ tr.Totalht }}  </td>
+                <td colspan="6" > {{ tr.Totalht }}  </td>
         </tr>
         <tr class="text-dark">
             <td colspan="2" style="text-align: right" >
                 <b>الأداء على القيمة المضافة:</b></td>
 
-                <td colspan="5">{{ tr.Totaltva }}</td>
+                <td colspan="6">{{ tr.Totaltva }}</td>
 
         </tr>
         <tr class="text-dark">
             <td colspan="2" style="text-align: right"  ><b>المجموع باحتساب الاداءات:</b></td>
-                <td colspan="5">{{ tr.Totalttc }}</td>
+                <td colspan="6">{{ tr.Totalttc }}</td>
         </tr>
         <tr>
 
 
-    <td colspan="10"><a href="{{ path('TabRecapF_PDF',{'id':tr.id}) }}"target="_blank"class="btn btn-danger btn-rectangle">
+    <td colspan="8"><a href="{{ path('TabRecapF_PDF',{'id':tr.id}) }}"target="_blank"class="btn btn-danger btn-rectangle">
             <i class="fas fa-download "> تحميل جدول الحوصلــة </i> </a>
-        <a href="{{ path('BonCommandeFournisseur_PDF',{'id':tr.id}) }}"target="_blank"class="btn btn-primary btn-rectangle">
+
+
+        {#<a href="{{ path('BonCommande_PDF',{'id':tr.id}) }}"target="_blank"class="btn btn-primary btn-rectangle">
+            <i class="fas fa-download "> تحميل طلــب تــــزود </i> </a>#}
+
+        <a href="{{ path('BonCommandePDF',{'id':tr.id}) }}"target="_blank"class="btn btn-primary btn-rectangle">
             <i class="fas fa-download "> تحميل طلــب تــــزود </i> </a>
-    <td colspan="10"></td></tr>
+    </td>
+        </tr>
 
 
         </tbody>

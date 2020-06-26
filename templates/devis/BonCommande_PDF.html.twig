@@ -9,6 +9,7 @@
             font-family: arial, sans-serif;
             border-collapse: collapse;
             width: 100%;
+
         }
 
 
@@ -32,6 +33,8 @@
         }
 
 
+
+
     </style>
 
 
@@ -39,6 +42,8 @@
 </head>
 
 <body>
+{% for f in fournisseur %}
+
 <div>
 
 
@@ -56,22 +61,24 @@
 
     <div style="text-align: center;">
         <h2  style="margin-bottom: 12px"  >طلـــب تــزوَد عـدد 2020/01</h2>
-        <h4>  السنــة المـاليــة : {{ "now"|date("Y") }}</h4>
+        <h4>  السنــة المـاليــة : {{ tr.annee }}</h4>
         <h4>عـنـــوان الفصـل : تـاثيـــث الادارة </h4>
-        <h4> التبـويــب : 02-201-05-001</h4>
+        <b dir="ltr">{{ tr.devis.rubrique }} : التبـويــب</b>
     </div>
 
 
 </div>
 
-<br>
+<br><br>
+    <h4 dir="rtl"> مدرســة الأختصــاصـات الجـوية : طريق سكرة كلم 4,5 حي الحـبيب - 3052 صفــاقس </h4>
+    <h4 dir="ltr" style="margin-top: 15px">Ecole des Spécialités Aéronotiques - Rte de Soukra km 4,5 Cité El Habib - 3052 SFAX </h4>
+
 <br>
 <table class="table table-bordered" width="100%" cellspacing="0" dir="rtl">
     <thead>
 
     <tr>
 
-        <th rowspan="3">ع/ر	</th>
         <th rowspan="3">بيــان المواد المطلوبة	</th>
         <th rowspan="3">الكمية</th>
         <th rowspan="3">TVA</th>
@@ -82,54 +89,78 @@
     </tr>
     </thead>
     <tbody>
+    {% set tottva=0 %}
+    {% set totht=0 %}
+    {% set totttc=0 %}
+    {% set nbl=0 %}
+
+    {% for k,l in lr %}
+    {% if l.nomfournisseur==f.nomfournisseur %}
+
+    <tr>
+        <td>{{ l.produit }}</td>
+
+        <td> {{ l.quantite }}</td>
+        <td>{{ l.tva }}</td>
+        <td>{{ l.puHt }}</td>
+        <td>{{ l.totalHt }}</td>
+
+        {% set nbl=nbl+1 %}
+
+        {% set tottva=tottva+l.tva %}
+        {% set totht=totht+l.totalHt %}
+        {% set totttc=totht+tottva %}
 
 
     <tr>
-        <td>{{ 1 }}</td>
-        <td>{{ lr.produit }}</td>
 
-        <td> {{ lr.quantite }}</td>
-        <td>{{ lr.tva }}</td>
-        <td>{{ lr.puHt }}</td>
-        <td>{{ lr.totalHt }}</td>
+        {% endif %}
+        {% endfor %}
 
 
     <tr>
+        <td colspan="2" style="border: none"></td>
 
-    <tr>
-        <td colspan="3" rowspan="3" >&nbsp;</td>
-
-        <td colspan="2" style="text-align: right"><b>المجموع دون احتساب الاداءات:</b></td>
-        <td> {{ lr.totalHt }}  </td>
+        <td colspan="2" style="text-align: right"><b>المجموع دون احتساب الاداءات:</b>
+        <td> {{ totht }}  </td>
 
 
     </tr>
     <tr>
+        <td colspan="2" style="border: none"></td>
 
         <td colspan="2" style="text-align: right" > <b>الأداء على القيمة المضافة:</b></td>
 
-        <td>{{ lr.tva }}</td>
+        <td>{{ tottva }}</td>
 
     </tr>
     <tr>
+        <td colspan="2" style="border: none"></td>
 
         <td colspan="2" style="text-align: right" ><b>المبلغ الجملي باحتساب الاداءات:</b></td>
-        <td >{{ lr.totalHt + lr.tva }}</td>
+        <td >{{ totttc }}</td>
+
 
 
     </tr>
     </tbody>
 </table>
 
+    <br>
+    <br>
+    <br>
+
+    {% set x=12-nbl %}
+
 <br>
 <br>
 
 <h3 style="text-align: right;">:الــــــمزود</h3>
-<h3 style="text-align: right;">{{ lr.nomFournisseur }}
+<h3 style="text-align: right;">{{ f.nomfournisseur }}
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <br>{{ lr.ligneDevis.devis.AddrFournisseur }}
+    <br>{{ f.addrf }}
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <br>Tèl:&nbsp;{{ lr.ligneDevis.devis.TelFourn }}
+    <br>Tèl:&nbsp;{{ f.telf }}
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
     <br>
     <br> <br>
@@ -137,14 +168,17 @@
 <h4>...........................بصفاقس في
 <br>
 <br>
-<br>
-    الامضـــــــــــــــاء والخـتــــــــــــم </h4>
-<br><br><br><br><br>
+
+    الامضــــــــــــــــاء والخـتـــــــــــــم </h4>
+<br><br><br><br><br><br>
 
 
 
+    {% for i in 1..x %}
+        <br>
+    {% endfor %}
 
-
+{% endfor %}
 </body>
 </html>
 

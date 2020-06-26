@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\BonCommande;
 use App\Entity\Budget;
+use App\Entity\Engagement;
+use App\Entity\LigneEngagement;
 use App\Entity\Rubrique;
 use App\Form\BudgetType;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -28,7 +31,7 @@ class BudgetController extends AbstractController
     }
 
     /**
-     * @Route("/budget/{id}", name="budget")
+     * @Route("/lebudget/{id}", name="budget")
      */
     public function budget($id)
     {
@@ -42,12 +45,17 @@ class BudgetController extends AbstractController
     }
 
     /**
-     * @Route("/Ajoutbudget", name="Ajoutbudget")
+     * @Route("/budget/", name="Ajoutbudget")
      */
     public function ajout(Request $request)
     {
         $em=$this->getDoctrine()->getManager();
-        $budget=new  Budget();
+
+            $budget = new  Budget();
+            $budget->setDate(new  \DateTime('now'));
+
+
+
         $rubrique=new ArrayCollection();
         foreach ($budget->getRubriques() as $rub)
         {
@@ -91,8 +99,12 @@ class BudgetController extends AbstractController
     {
         $em=$this->getDoctrine()->getManager();
         $budget=$this->getDoctrine()->getRepository(Budget::class)->find($id);
+
+        $budget->setDate(new  \DateTime('now'));
+
         $formedit=$this->createForm(BudgetType::class,$budget);
         $formedit->handleRequest($request);
+
         if($formedit->isSubmitted()&&$formedit->isValid())
         {
             $em->persist($budget);
@@ -120,6 +132,55 @@ class BudgetController extends AbstractController
             $filename,'application/pdf','inline');
 
 
+
+    }
+    /**
+     * @Route("/engagement/{id}",name="")
+     */
+    public function ajoutengagement(Request $request,$id)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $lignengagement=new LigneEngagement();
+        $engagment=new Engagement();
+
+        $repeng=$this->getDoctrine()->getRepository(Engagement::class);
+
+        $rep=$this->getDoctrine()->getRepository(Rubrique::class);
+        $reb=$rep->find($id);
+
+        $lignengagement->setNum(count($repeng->findAll()+1));
+
+    }
+    /**
+     * @Route("/boncommandes",name="boncommandes")
+     */
+    public function afficherboncommande()
+    {
+        $rep=$this->getDoctrine()->getRepository(BonCommande::class);
+        $boncommande=$rep->findAll();
+        return $this->render('budget/afficherboncommande.html.twig',[
+            'boncommande'=>$boncommande
+        ]);
+    }
+    /**
+     * @Route("/detboncommandes/{id}",name="detboncommandes")
+     */
+    public function detailboncommande($id,\Knp\Snappy\Pdf $knpsnappy)
+    {
+        $rep=$this->getDoctrine()->getRepository(BonCommande::class);
+        $boncommande=$rep->find($id);
+
+
+        $this->knpSnappy =$knpsnappy;
+        $html=$this->renderView('budget/detailboncommande.html.twig',[
+            'b' => $boncommande,
+
+        ]);
+        $filename='BonCommande.pdf';
+
+        return new  PdfResponse(
+            $knpsnappy->getOutputFromHtml($html),
+            $filename,'application/pdf','inline');
 
     }
 }

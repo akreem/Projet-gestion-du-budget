@@ -25,29 +25,47 @@ class LigneDevisType extends AbstractType
         $builder
             ->add('produit',TextType::class)
             ->add('quantite',NumberType::class,[
-                'attr'=>['class'=>'form-control py-4 col','placeholder'=>'Entrer Engagement non payè'
+                'attr'=>['class'=>'form-control py-4 col'
                     ,'step'=>'0.01','min' => 0,],
                 'label_attr' => ['class' => 'm-0 font-weight-bold text-primary '],
                 'html5' => true,
 
             ])
             ->add('pu_ht',NumberType::class,[
-                'attr'=>['class'=>'form-control py-4 col','placeholder'=>'Entrer Engagement non payè'
-                    ,'step'=>'0.01','min' => 0,],
+                'attr'=>['class'=>'form-control py-4 col'
+                    ,'step'=>'0.01','min' => 0,'value' => 0],
                 'label_attr' => ['class' => 'm-0 font-weight-bold text-primary '],
                 'html5' => true,
 
             ])
             ->add('tva',NumberType::class,[
-                'attr'=>['class'=>'form-control py-4 col','placeholder'=>'Entrer Engagement non payè'
-                    ,'step'=>'0.01','min' => 0,],
+                'attr'=>['class'=>'form-control py-4 col'
+                    ,'min' => 0,'value' => 0],
                 'label_attr' => ['class' => 'm-0 font-weight-bold text-primary '],
                 'html5' => true,
 
             ])
             ->add('total_ht',NumberType::class,[
                 'attr'=>[
+                    'step'=>'0.01',
+
                     'jAutoCalc'=>'{qty} * {price}'
+
+                ],
+                'empty_data'=>'0'
+            ])
+            ->add('montanttva',NumberType::class,[
+                'attr'=>[
+                    'step'=>'0.01',
+                    'jAutoCalc'=>'{ttht} * {ttva}/100'
+
+                ],
+                'empty_data'=>'0'
+            ])
+            ->add('totalttc',NumberType::class,[
+                'attr'=>[
+                    'step'=>'0.01',
+                    'jAutoCalc'=>'{ttht} + {totaltva}'
 
                 ],
                 'empty_data'=>'0'

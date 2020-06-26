@@ -23,12 +23,7 @@ class LigneDevisViergeType extends AbstractType
             ->add('quantite',NumberType::class,[
                 'attr'=>['class'=>'form-control py-4 col','placeholder'=>'Entrer Quantite', 'step'=>'0.01','min' => 0,],
                 'label_attr'=>['class'=>'m-0 font-weight-bold text-primary  '] ,
-                'html5' => true,
-
-            ])
-
-
-        ;
+                'html5' => true]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -58,7 +58,7 @@
         <h2  style="margin-bottom: 12px"  >جـدول مقــارنة الاثـمـــان</h2>
         <h4>  السنــة المـاليــة : {{ "now"|date("Y") }}</h4>
         <h4>عـنـــوان الفصـل : تـاثيـــث الادارة </h4>
-        <h4> التبـويــب : 02-201-05-001</h4>
+        <b dir="ltr">{{ dv.rubrique }} : التبـويــب</b>
     </div>
     <br>
     <br>
@@ -103,7 +103,7 @@
                     {% else %}
                         <td> {{ d.ligneDevis[k].quantite }}</td>
                         <td>{{ d.ligneDevis[k].puHt }}</td>
-                        <td>{{ d.ligneDevis[k].tva }}</td>
+                        <td>{{ d.ligneDevis[k].tva }}%</td>
                         <td>{{ d.ligneDevis[k].totalHt }}</td>
 
                     {% endif %}

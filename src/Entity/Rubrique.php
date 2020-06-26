@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,7 +19,7 @@ class Rubrique
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
     private $code;
 
@@ -31,32 +33,45 @@ class Rubrique
      */
     private $montant;
 
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $engagementnpaye;
-
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $engagementpaye;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Budget", inversedBy="rubriques")
      */
     private $budget;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Engagement", mappedBy="Rubrique")
+     */
+    private $engagements;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $engp;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $engnp;
+
+
+
+    public function __construct()
+    {
+        $this->engagements = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCode(): ?int
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
-    public function setCode(int $code): self
+    public function setCode(string $code): self
     {
         $this->code = $code;
 
@@ -87,29 +102,7 @@ class Rubrique
         return $this;
     }
 
-    public function getEngagementnpaye(): ?float
-    {
-        return $this->engagementnpaye;
-    }
 
-    public function setEngagementnpaye(float $engagementnpaye): self
-    {
-        $this->engagementnpaye = $engagementnpaye;
-
-        return $this;
-    }
-
-    public function getEngagementpaye(): ?float
-    {
-        return $this->engagementpaye;
-    }
-
-    public function setEngagementpaye(float $engagementpaye): self
-    {
-        $this->engagementpaye = $engagementpaye;
-
-        return $this;
-    }
 
     public function getBudget(): ?Budget
     {
@@ -122,4 +115,60 @@ class Rubrique
 
         return $this;
     }
+
+    /**
+     * @return Collection|Engagement[]
+     */
+    public function getEngagements(): Collection
+    {
+        return $this->engagements;
+    }
+
+    public function addEngagement(Engagement $engagement): self
+    {
+        if (!$this->engagements->contains($engagement)) {
+            $this->engagements[] = $engagement;
+            $engagement->setRubrique($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEngagement(Engagement $engagement): self
+    {
+        if ($this->engagements->contains($engagement)) {
+            $this->engagements->removeElement($engagement);
+            // set the owning side to null (unless already changed)
+            if ($engagement->getRubrique() === $this) {
+                $engagement->setRubrique(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getEngp(): ?float
+    {
+        return $this->engp;
+    }
+
+    public function setEngp(?float $engp): self
+    {
+        $this->engp = $engp;
+
+        return $this;
+    }
+
+    public function getEngnp(): ?float
+    {
+        return $this->engnp;
+    }
+
+    public function setEngnp(?float $engnp): self
+    {
+        $this->engnp = $engnp;
+
+        return $this;
+    }
+
 }

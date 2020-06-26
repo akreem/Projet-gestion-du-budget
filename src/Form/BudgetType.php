@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,27 +17,29 @@ class BudgetType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('annee',NumberType::class)
-            ->add('date',DateType::class,[
-                'widget' => 'single_text',
-                'html5' => false,
-                'attr' => ['class' => 'datepicker'],
-                'empty_data' => 'Select a date'
-
+            ->add('annee',ChoiceType::class,[
+                'choices'=>[
+                    '2020'=>2020,
+                    '2021'=>2021,
+                    '2022'=>2022,
+                    '2023'=>2023,
+                    '2024'=>2024,
+                ]
             ])
             ->add('totalht',NumberType::class)
-            ->add('totalnpaye',NumberType::class,[
-                'attr'=>[
-                    'jAutoCalc'=>'SUM({enp})'
 
-                ]
-            ])
-            ->add('totalpaye',NumberType::class,[
+            ->add('totalnpaye',HiddenType::class,[
                 'attr'=>[
-                    'jAutoCalc'=>'SUM({ep})'
-
-                ]
+                    'jAutoCalc'=>'SUM({enp})'],
+                'empty_data'=>0
             ])
+
+            ->add('totalpaye',HiddenType::class,[
+                'attr'=>[
+                    'jAutoCalc'=>'SUM({ep})'],
+                'empty_data'=>0
+            ])
+
             ->add('rubriques',CollectionType::class,[
                 'entry_type' => RubriqueType::class,
                 'label' => false,

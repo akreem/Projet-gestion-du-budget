@@ -77,7 +77,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
 
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{ path('account') }}">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Account
                                 </a>
@@ -132,8 +132,10 @@
 
                             <th>الكمية</th>
                             <th>السعر الفردي</th>
-                            <th>TVA</th>
-                            <th>المجموع</th>
+                            <th>(%)TVA</th>
+                            <th>المجموع دون احتساب الاداءات</th>
+                            <th>مجموع الاداءات</th>
+                            <th>المجموع باحتساب الاداءات</th>
 
                         </tr>
                         </thead>
@@ -154,38 +156,42 @@
                                     })}}</td>
                             <td>{{ form_widget(f.tva,{'attr': {'class': 'form-control form-control-sm','readonly':'true'
                                     ,'label':'ttva1'}}
-                                    ) }}</td>
+                                    )}}</td>
                             <td>{{form_widget(f.totalht,{'attr': {'class': 'form-control form-control-sm ','step':'0.001'
                                     ,'label':'ttht1'}
                                     }) }}</td>
+                            <td>{{form_widget(f.montanttva,{'attr': {'class': 'form-control form-control-sm ','step':'0.001'
+                                    ,'label':'totaltva'}
+                                }) }}</td>
+
+                            <td>{{form_widget(f.totalttc,{'attr': {'class': 'form-control form-control-sm ','step':'0.001'
+                                    ,'label':'totalttc'}
+                                }) }}</td>
 
                         <tr>
                             {% endfor %}
 
                         <tr>
-                            <td colspan="2" style="text-align: right"><b>المجموع دون احتساب الاداءات:</b></td>
-                            <td colspan="5" >     {{ form_widget(form.totalht,{
+                            <!--<td colspan="2" style="text-align: right"><b>المجموع دون احتساب الاداءات:</b></td>-->
+                            <td colspan="5" style="border: none"></td>
+                            <td>     {{ form_widget(form.totalht,{
                                     'attr':{ 'class':'form-control form-control-sm ','step':'0.01'
                                         ,'label':'total_ht1'
                                     }}) }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" style="text-align: right" > <b>الأداء على القيمة المضافة:</b></td>
 
-                            <td colspan="5">    {{ form_widget(form.totaltva,{
+                            <td >    {{ form_widget(form.totaltva,{
                                     'attr':{ 'class':'form-control form-control-sm','step':'0.01','
                                                     readonly':'true','label':'total_tva1'
                                     }
-                                }) }}</td>
+                                }) }}
+                            </td>
 
-                        </tr>
-                        <tr>
-                            <td colspan="2" style="text-align: right" ><b>المجموع باحتساب الاداءات:</b></td>
-                            <td colspan="5">    {{ form_widget(form.totalttc,{
+                            <td>    {{ form_widget(form.totalttc,{
                                     'attr':{ 'class':'form-control form-control-sm','step':'0.01','
                                                     readonly':'true'
                                     }
-                                }) }}</td>
+                                }) }}
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -197,12 +203,12 @@
                         <div class="modal-dialog " role="document">
                             <div class="modal-content">
                                 <div class="modal-header modal-colored-header bg-primary">
-                                    <h5 class="modal-title text-white" id="exampleModalLabel">Sure?</h5>
+                                    <h5 class="modal-title text-white" id="exampleModalLabel">Demande de confirmation</h5>
                                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                         <span class="text-white" aria-hidden="true">×</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">Are you sure you want to submit?</div>
+                                <div class="modal-body">Êtes-vous sûr de vouloir continuer ?</div>
                                 <div class="modal-footer">
                                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
                                     <button class="btn btn-primary" type="submit">Valider</button>

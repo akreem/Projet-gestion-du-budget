@@ -1,15 +1,12 @@
 {% extends 'base.html.twig' %}
 
             {% block body %}
+<title>وضعية الميزانية الذاتية لسنة{{ budget.annee }}</title>
 
 
-            <html>
             <head>
                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-                <title>
-                    devis
-                </title>
 
                 <style>
                     table {
@@ -84,6 +81,7 @@
                         <th> الإعتمادات المتعهد بها وغير المدفوعة</th>
                         <th> الإعتمادات المتعهد بها المدفوعة</th>
                         <th> المبلغ المتبقي</th>
+                        <th></th>
 
                     </tr>
                             </thead>
@@ -95,9 +93,12 @@
                         <td>{{ l.code }}</td>
                         <td>{{ l.titre }}</td>
                         <td>{{ l.montant }}</td>
-                        <td>{{ l.engagementnpaye }}</td>
-                        <td>{{ l.engagementpaye }}</td>
-                        <td>{{ l.montant-l.engagementnpaye-l.engagementpaye }}</td>
+                        <td>{{ l.engnp }}</td>
+                        <td>{{ l.engp }}</td>
+                        <td>{{ l.montant-l.engnp-l.engp }}</td>
+                        <td><a href="{{ path('Ajoutengagement',{'id':l.id}) }}" target="_blank"class="btn btn-success btn-rectangle">
+                                <i class="fas fa-plus"></i>
+                            </a></td>
 
                     </tr>
                             {% endfor %}

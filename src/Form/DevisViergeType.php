@@ -22,13 +22,7 @@ class DevisViergeType extends AbstractType
     {
         $builder
 
-            ->add('date_edition',DateType::class,[
-                'widget' => 'single_text',
-                 'html5' => false,
-                 'attr' => ['class' => 'datepicker1'],
-                    'empty_data' => 'Select a date'
 
-            ])
             ->add('date_limite',DateType::class,[
                 'widget' => 'single_text',
                 'html5' => false,
@@ -36,6 +30,7 @@ class DevisViergeType extends AbstractType
                 'empty_data' => 'Select a date'
             ])
             ->add('nb_devis_edit')
+            ->add('rubrique')
             ->add('ligneDevisVierges',CollectionType::class,[
                 'entry_type' => LigneDevisViergeType::class,
                 'label' => false,

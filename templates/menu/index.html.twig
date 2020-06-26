@@ -5,6 +5,7 @@
         <link href="css/styles.css" type="text/css" rel="stylesheet" />
 
     </head>
+    <title>Dashboard</title>
 
     <body>
 
@@ -14,7 +15,7 @@
                 <div class="card bg-primary text-white mb-4">
                     <div class="card-body">Mon Compte</div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#">View Details</a>
+                        <a class="small text-white stretched-link" href="{{ path('account') }}">View Details</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
@@ -40,7 +41,36 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-gradient-warning text-white mb-4">
+                <div class="card-body">Bon de Commande</div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="{{ path('boncommandes') }}">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-gradient-dark text-white mb-4">
+                    <div class="card-body">Pv de Conformité</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="{{ path('afficherpv') }}">View Details</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
 
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-gradient-info text-white mb-4">
+                    <div class="card-body">Ordre de Paiement</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="{{ path('ordrepayement') }}">View Details</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </ul>
 
 

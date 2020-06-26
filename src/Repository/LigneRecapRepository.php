@@ -28,11 +28,12 @@ class LigneRecapRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('l')
             ->andWhere('l.TableauRecap = :tr')
             ->setParameter('tr', $idtr)
-        //  ->groupBy('nomfournisseur')
+            ->groupBy('l.nomfournisseur')
             ->getQuery()
             ->getResult()
         ;
     }
+
 
 
     /*

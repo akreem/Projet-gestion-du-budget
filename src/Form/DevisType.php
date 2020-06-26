@@ -33,7 +33,6 @@ class DevisType extends AbstractType
 
 
 
-
             ->add('total_HT',NumberType::class,[
                 'attr'=>[
                     'jAutoCalc'=>'SUM({ttht})'
@@ -43,17 +42,14 @@ class DevisType extends AbstractType
 
             ->add('total_tva',NumberType::class,[
                 'attr'=>[
-                    'jAutoCalc'=>'SUM({ttva})'
+                    'jAutoCalc'=>'SUM({totaltva})'
 
                 ]
             ])
 
                 ->add('total_ttc',NumberType::class,[
                 'attr'=>[
-                'full_name'=>'grand_total1',
-                'class'=>'form-control form-control-sm',
-                'readonly'=>'true',
-                    'jAutoCalc'=>'{total_tva} + {total_ht}'
+                    'jAutoCalc'=>'SUM({ttc})'
 
                 ],
 

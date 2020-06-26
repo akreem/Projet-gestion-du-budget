@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Engagement PDF
+    </title>
+</head>
+
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+
+    }
+
+
+    th,td {
+        border: 1px solid black;
+        text-align: center;
+        padding: 8px;
+
+    }
+
+
+    h4
+    {
+        margin:0px ;
+
+
+
+    }
+    h2{
+        margin:0px ;
+    }
+
+
+
+
+</style>
+
+
+
+</html>
+<body>
+<div>
+    <div  style="float: left; " >
+        <h4>السنـــة الماليــــة {{ eng.rubrique.budget.annee }}</h4>
+    </div>
+
+    <div  style="float: right;" dir="rtl">
+        <h4> الجمهوريــــــــــة التونسيــــــــة  </h4>
+        <h4> وزارة الدفــــــــــــاع الوطنــــــي  </h4>
+        <h4> جيـــــــــــــــش الطيــــــــــــــران</h4>
+        <h4> مدرســة الأختصــاصـات الجـوية</h4>
+
+    </div>
+    <br>
+    <br><br>
+    <br><br>
+
+    <div style="text-align: center;" >
+        <h2 style="margin-bottom: 12px"  > إقتــراح تعهــد بالنفقــة أو تنقيــص تعهــد </h2>
+        <h4> إقتــراح تعهـــد بالنفقــة عـــدد : {{ eng.num }} </h4>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+
+</div>
+<div dir="rtl">
+    <span style="text-align: right;"><b> الفصـل {{ eng.rubrique.code }}</b></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+<br>
+
+<table>
+
+    <thead  >
+    <tr>
+        <th colspan="7" style="text-align: right;"><b>عنوان الفصل بالميزانية : {{ eng.rubrique.titre }}</b></th>
+    </tr>
+    </thead>
+
+    <tr>
+        <th>الملاحظات</th>
+        <th>المبلغ المتبقي	</th>
+        <th>مبلغ التنقيص</th>
+        <th>المبلغ المطلوب</th>
+        <th>المبلغ المتبقي</th>
+        <th>مبلغ التعهدات السابقة</th>
+        <th>الاعتمادات المرصودة</th>
+
+    </tr>
+    <tr>
+        <td></td>
+        <td>{{ eng.rubrique.montant-eng.montant}}</td>
+        <td></td>
+        <td>{{ eng.montant }}</td>
+        <td>{{ eng.rubrique.montant }}</td>
+        <td>0.00</td>
+        <td>{{ eng.rubrique.montant }}</td>
+    </tr>
+</table>
+<br>
+<br>
+<table dir="rtl">
+    <tr>
+        <th colspan="2">القائمة التقديرية أو الفاتورة</th>
+        <th rowspan="2">المزود </th>
+        <th rowspan="2">الموضوع</th>
+        <th rowspan="2">المبلغ</th>
+        <th rowspan="2">الملاحظات</th>
+
+
+    </tr>
+    <tr>
+        <td><b>العدد</b></td>
+        <td><b>التاريخ</b></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>تعهد إحتياطي عدد {{ eng.num }}</td>
+        <td>{{ eng.montant }}</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td colspan="4" style="text-align: left;" ><b> الجملة:</b></td>
+        <td><b>{{ eng.montant}}</b></td>
+    </tr>
+</table>
+<br>
+<br>
+
+<table dir="rtl">
+    <tr>
+        <td style="text-align: right;"><b>جملة إعتمادات الفصل</b></td>
+        <td style="text-align: right;"><b>{{ eng.rubrique.montant }}</b></td>
+        <td rowspan="4" style="text-align: center;">
+            <p><b>صفاقس في : .........................</b></p>
+            <p> <b>العقيد حمودة بسيس،آمر الصــرف<br> بمدرسـة الإختصـاصــات الجويـــة</b></p>
+
+
+        </td>
+    </tr>
+    <tr>
+
+        <td style="text-align: right;"><b>مبلغ التعهد</b></td>
+        <td style="text-align: right;"><b>{{ eng.montant }}</b></td>
+    </tr>
+    <tr>
+        <td style="text-align: right;"><b>مبلغ التأشيرات السابقة</b></td>
+        <td style="text-align: right;"><b>0.00</b></td>
+    </tr><tr>
+        <td style="text-align: right;"><b>جملة الإعتمادات المتعهد بها </b></td>
+        <td style="text-align: right;"><b>{{ eng.montant }}</b></td>
+    </tr>
+</table>
+<br>
+<br>
+<table>
+
+    <th> ملاحظات المراقب</th>
+    <th>رد آمر الصرف </th>
+    <th>تأشيرة المراقب </th>
+    <tr>
+        <td><br><br><br><br><br></td>
+        <td><br><br><br><br><br></td>
+        <td><br><br><br><br><br></td>
+    </tr>
+
+</table>
+
+</body>

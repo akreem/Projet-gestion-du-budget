@@ -27,9 +27,13 @@ class DevisViergeController extends AbstractController
         $em=$this->getDoctrine()->getManager();
         $devis_vierge = new DevisVierge();
         $ligne_devis= new ArrayCollection();
+
+
+
         $repv = $this->getDoctrine()->getRepository(DevisVierge::class);
         $devis_vierge->setnum(count($repv->findAll())+1);
         $devis_vierge->setYear(date("Y"));
+        $devis_vierge->setDateEdition(new  \DateTime('now'));
 
         foreach ($devis_vierge->getLigneDevisVierges() as $ligneDevisVierge)
         {
@@ -156,6 +160,9 @@ class DevisViergeController extends AbstractController
     {
         $em=$this->getDoctrine()->getManager();
         $devisVierge=$em->getRepository(DevisVierge::class)->find($id);
+
+        $devisVierge->setDateEdition(new  \DateTime('now'));
+
         $formedit=$this->createForm(DevisViergeType::class,$devisVierge);
         $formedit->handleRequest($request);
         if($formedit->isSubmitted() && $formedit->isValid())
@@ -189,6 +196,7 @@ class DevisViergeController extends AbstractController
         // initialiser un devis a partir des données d'un devis vierge
         $devis->setnum($devisVierge->getNum());
         $devis->setAnnee($devisVierge->getYear());
+        $devis->setRubrique($devisVierge->getRubrique());
         $devis->setDevisVierge($devisVierge);
 
         ///////////////////////////////////////////

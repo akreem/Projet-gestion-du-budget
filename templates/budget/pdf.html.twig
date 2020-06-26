@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <title>وضعية الميزانية الذاتية</title>
+    <title>PDFوضعية الميزانية الذاتية</title>
 
     <style>
         table {
@@ -98,9 +98,9 @@
                         <td>{{ l.code }}</td>
                         <td>{{ l.titre }}</td>
                         <td>{{ l.montant }}</td>
-                        <td>{{ l.engagementnpaye }}</td>
-                        <td>{{ l.engagementpaye }}</td>
-                        <td>{{ l.montant-l.engagementnpaye-l.engagementpaye }}</td>
+                        <td>{{ l.engnp }}</td>
+                        <td>{{ l.engp }}</td>
+                        <td>{{ l.montant-l.engnp-l.engp }}</td>
 
                     </tr>
                 {% endfor %}

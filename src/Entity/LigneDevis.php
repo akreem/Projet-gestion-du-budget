@@ -51,6 +51,16 @@ class LigneDevis
      */
     private $devis;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $montanttva;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $totalttc;
+
 
     public function getId(): ?int
     {
@@ -131,6 +141,30 @@ class LigneDevis
     public function __toString()
     {
         return $this->produit;
+    }
+
+    public function getMontanttva(): ?float
+    {
+        return $this->montanttva;
+    }
+
+    public function setMontanttva(float $montanttva): self
+    {
+        $this->montanttva = $montanttva;
+
+        return $this;
+    }
+
+    public function getTotalttc(): ?float
+    {
+        return $this->totalttc;
+    }
+
+    public function setTotalttc(float $totalttc): self
+    {
+        $this->totalttc = $totalttc;
+
+        return $this;
     }
 
 

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> محضر إستلام عتاد عدد {{ pv.num }}</title>
+
+</head>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+
+    th,td {
+        border: 1px solid black;
+        text-align: center;
+        padding: 8px;
+
+    }
+
+
+    h4
+    {
+        margin:0px ;
+
+
+
+    }
+    h2{
+        margin:0px ;
+    }
+</style>
+<body>
+    <div  style="float: left; " >
+        <h4>صفــاقس في <b>{{ pv.date |date('Y/m/d') }}</b></h4>
+
+    </div>
+
+    <div  style="float: right;" dir="rtl">
+        <h4> الجمهوريــــــــــة التونسيــــــــة  </h4>
+        <h4> وزارة الدفــــــــــــاع الوطنــــــي  </h4>
+        <h4> جيـــــــــــــــش الطيــــــــــــــران</h4>
+        <h4> مدرســة الأختصــاصـات الجـوية</h4>
+        <h4>عــــدد {{ pv.num }} /م.إ.م/م.إ.جو</h4>
+    </div>
+    <br>
+    <br><br>
+    <br><br>
+
+    <div style="text-align: center;">
+        <h2><u>محضر إستلام عتاد</u></h2>
+        <br>
+        <h4>(على حساب الميزانية الذاتية)</h4>
+    </div>
+
+    <br>
+    <br>
+<br>
+
+    <p dir="rtl">و في يوم <b>{{ pv.date |date('Y/m/d') }}</b> ، إجتمعت لجنة إستلام العتاد المكونة من العسكريين الآتي ذكرهم و ذلك قصد معاينة و إستلام المواد المذكورة أسفله .</p>
+    <br>
+    <p dir="rtl">- &nbsp; {{ pv.grade1 }} {{ pv.cad1 }}&nbsp;&nbsp;&nbsp;&nbsp;  ............................................&nbsp;&nbsp;&nbsp;   : رئيس </p>
+    <p dir="rtl">- &nbsp; {{ pv.grade2 }} {{ pv.cad2 }}&nbsp;&nbsp;&nbsp;&nbsp;   ............................................&nbsp;&nbsp;&nbsp;   : عضو </p>
+    <p dir="rtl">- &nbsp; {{ pv.grade3 }} {{ pv.cad3 }}&nbsp;&nbsp;&nbsp;&nbsp; ............................................&nbsp;&nbsp;&nbsp;   : عضو </p>
+    <p dir="rtl">- &nbsp; {{ pv.grade4 }} {{ pv.cad4 }}&nbsp;&nbsp;&nbsp;&nbsp;............................................&nbsp;&nbsp;&nbsp;   : عضو </p>
+    <p dir="rtl">- &nbsp; {{ pv.grade5 }} {{ pv.cad5 }}&nbsp;&nbsp;&nbsp;&nbsp;   ............................................&nbsp;&nbsp;&nbsp;   : عضو </p>
+
+
+    <br>
+    <br>
+    <table dir="rtl">
+        <tr>
+            <th>ع/ر</th>
+            <th>بيان المواد المطلوبة</th>
+            <th>الكمية</th>
+        </tr>
+        {% for i,l in pv.Lignepvs %}
+
+        <tr>
+        <td>{{ i+1 }}</td>
+            <td>{{ l.produit }}</td>
+            <td>{{ l.quantite }}</td>
+
+        </tr>
+        {% endfor %}
+        <tr>
+        <td><strong>الملاحظات</strong></td>
+            <td colspan="2"><p style="text-align: right;">{{ pv.commentaire }}
+                </tr>
+
+    </table>
+    <br>
+    <br>
+    <br>
+    <p style="float: right;">{{ pv.grade5 }} {{ pv.cad5 }}</p>
+    <p style="float: left;">{{ pv.grade4 }} {{ pv.cad4 }} </p>
+    <p style="text-align: center;">{{ pv.grade3 }} {{ pv.cad3 }}</p>
+
+    <br>
+    <br>
+    <br>
+
+    <p style="float: right;">{{ pv.grade1 }} {{ pv.cad1 }}</p>
+    <p style="float: left;">{{ pv.grade2 }} {{ pv.cad2 }}</p>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</body>
+</html>
+
+
+
+

@@ -3,6 +3,9 @@
 {% block title %}Hello TaskController!{% endblock %}
 
 {% block body %}
+    <title>
+        Liste Devis Vierges
+    </title>
     <style>
         .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
         .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
@@ -43,7 +46,7 @@
                             <th>Numèro</th>
                             <th>Date Edition</th>
                             <th>Date Limite</th>
-                            <th>Nombre de devis edite</th>
+                            <th>Rubrique</th>
                             <th >Action</th>
 
                         </tr>
@@ -58,9 +61,9 @@
                                 <td>{{ t.num }}/{{ t.year}}   {% if t.Devis  is empty %} <span class="badge badge-primary badge-pill">Nouveau</span>{% endif %}
 
                                 </td>
-                                <td>{{ t.DateEdition | date('d/m/y') }}</td>
-                                <td>{{ t.DateLimite | date('d/m/y') }}</td>
-                                <td style="width: 120px">{{ t.NbDevisEdit }}</td>
+                                <td>{{ t.DateEdition | date('d/m/Y') }}</td>
+                                <td>{{ t.DateLimite | date('d/m/Y') }}</td>
+                                <td style="width: 120px">{{ t.rubrique }}</td>
                                 <td>
 
                                     <a href="{{ path('detail_devis',{'id':t.id}) }}"target="_blank"class="btn btn-primary btn-rectangle">
@@ -73,21 +76,24 @@
 
                                     <a href="{{ path('SupprimerDevis', {'id': t.id}) }}"
                                        class="btn btn-danger btn-rectangle delete"
-                                       data-confirm="Are you sure to delete this item?">
+                                       data-confirm="Êtes-vous sûr de vouloir supprimer ?">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                     {% endif %}
                                     <a href="{{ path('printDevis',{'id':t.id}) }}"target="_blank"class="btn btn-info btn-rectangle">
                                         <i class="fas fa-download "></i> </a>
+
                                     <a href="{{ path('ajout_devis', {'id': t.id}) }} " target="_blank" class="btn btn-success btn-rectangle">
                                         <i class="fas fa-folder-plus"></i>
                                     </a>
 
                                     {% if not t.Devis  is empty %}
 
+
                                         <a href="{{ path('TabComparatif',{'id':t.id}) }}" target="_blank"
                                            class="btn btn-dark btn-icon-split"><span class="text"><strong>جـدول المقارنة </strong></span>
                                         </a>
+
 
 
                                         {% for tr in tr %}

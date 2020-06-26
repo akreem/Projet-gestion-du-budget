@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<title>Mon Compte</title>
+    <div class="container">
+        <div>
+            <div class="col-9">
+                <h2 class="alert-heading">Paramètres généraux du compte</h2>
+                <div class="alert alert-light border-left-success " >
+                    <h5 class="alert-heading"><b>Username:</b></h5>
+                    <hr>
+                    {{ user.username }}
+                </div>
+                <div  class="alert alert-light border-left-success">
+                    <h5  class="alert-heading"><b>Email:</b></h5>
+                    <hr>
+                    {{ user.email }}
+                </div>
+            </div>
+            <div>
+                {% if user is same as(app.user) %}
+                    <div class="mt-3">
+                        <a href="{{ path('account_edit') }}" class="btn btn-primary mr-2 mb-2">Modifier mes informations</a>
+                        <a href="{{ path('account_password') }}" class="btn btn-primary mb-2">Modifier mon mot de passe</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

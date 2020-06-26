@@ -5,9 +5,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BudgetRepository")
+ * @UniqueEntity(fields={"annee"},message="l'année budgétaire choisie est déjà planifié !")
+
  */
 class Budget
 {
@@ -19,7 +22,7 @@ class Budget
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer",unique=true)
      */
     private $annee;
 

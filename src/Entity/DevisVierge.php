@@ -54,12 +54,23 @@ class DevisVierge
      */
     private $devis;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $rubrique;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\BonCommande", mappedBy="devisVierge")
+     */
+    private $bonCommandes;
+
 
 
     public function __construct()
     {
         $this->ligneDevisVierges = new ArrayCollection();
         $this->devis = new ArrayCollection();
+        $this->bonCommandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -183,6 +194,49 @@ class DevisVierge
             // set the owning side to null (unless already changed)
             if ($devi->getDevisVierge() === $this) {
                 $devi->setDevisVierge(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getRubrique(): ?string
+    {
+        return $this->rubrique;
+    }
+
+    public function setRubrique(string $rubrique): self
+    {
+        $this->rubrique = $rubrique;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|BonCommande[]
+     */
+    public function getBonCommandes(): Collection
+    {
+        return $this->bonCommandes;
+    }
+
+    public function addBonCommande(BonCommande $bonCommande): self
+    {
+        if (!$this->bonCommandes->contains($bonCommande)) {
+            $this->bonCommandes[] = $bonCommande;
+            $bonCommande->setDevisVierge($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBonCommande(BonCommande $bonCommande): self
+    {
+        if ($this->bonCommandes->contains($bonCommande)) {
+            $this->bonCommandes->removeElement($bonCommande);
+            // set the owning side to null (unless already changed)
+            if ($bonCommande->getDevisVierge() === $this) {
+                $bonCommande->setDevisVierge(null);
             }
         }
 

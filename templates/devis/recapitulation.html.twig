@@ -49,11 +49,13 @@
         جـدول مقـــارنة الاثـمـــان
 <br>
 
-        السنــة المـاليــة : <b style="color: #ff253a">{{ "now"|date("Y") }}</b>
+        السنــة المـاليــة : <b style="color: #ff253a">{{ dv.year }}</b>
         <br>
         عـنـــوان الفصـل : تـاثيـــث الادارة
         <br>
-        التبـويــب : 02-201-05-001
+
+        <b dir="ltr" style="color: #ff253a">{{ dv.rubrique }}</b> : التبـويــب
+
 
     </h5>
             <div class="card-body">
@@ -75,7 +77,7 @@
                                 <th colspan="5" >{{ d.nomFournisseur }}
                                     <a  href="{{ path('RecapParFournisseur',{'id':d.id}) }}"
                                         class="delete"
-                                        data-confirm="Are you sure to Add this item?">
+                                        data-confirm="Êtes-vous sûr de vouloir continuer ?">
                                         <img class="img-profile" src="/img/plus2.png" style="width:32px;height:32px;margin-right: 10px"/></a>
                                 </th>
                             {% endfor %}
@@ -103,11 +105,11 @@
                                 {% else %}
                                     <td> {{ d.ligneDevis[k].quantite }}</td>
                                     <td>{{ d.ligneDevis[k].puHt }}</td>
-                                    <td>{{ d.ligneDevis[k].tva }}</td>
+                                    <td>{{ d.ligneDevis[k].tva }}%</td>
                                     <td>{{ d.ligneDevis[k].totalHt }}</td>
                                     <td dir="rtl"><a  href="{{ path('RecapParArticle',{'id':d.ligneDevis[k].id}) }}"
                                                       class="delete"
-                                                      data-confirm="Are you sure to Add this item?">
+                                                      data-confirm="Êtes-vous sûr de vouloir continuer ?">
                                             <img class="img-profile rounded-circle"  src="/img/plus.png" /></a>
                                     </td>
 

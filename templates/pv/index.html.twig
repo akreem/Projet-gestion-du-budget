@@ -1,0 +1,150 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello!{% endblock %}
+
+{% block body %}
+    <title>Ajouter Proces Verbale</title>
+
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+
+    </style>
+
+    <body>
+
+    <fieldset class="container">
+        <div class="col-md-15">
+            <div class="card shadow-lg border-0 rounded-lg mt-1">
+                <div class="card-header border-bottom-success " >
+                    <h3  class="text-gray-900 text-center font-weight-bold my-4">Ajouter Procès Verbal :
+                    </h3>
+                </div>
+                <div class="card-body ">
+                    {{ form_start(form) }}
+                    <div class="col-md-13">
+                        <fieldset class=" card-header border-bottom-primary border-left-primary" >
+                            <h5  style="color: red;text-align: right"><b>
+                                    Comité de réception des équipements</b></h5>
+                            <br>
+                            <div class="table-responsive">
+                                <table name="cart" class="table table-bordered" width="100%" cellspacing="0" id="myTable">
+                                    <thead style="background-color: #ff253a;opacity: 0.9; color: #FFFFFF";>
+                                    <tr role="row">
+                                        <th>#</th>
+                                        <th>Grade</th>
+                                        <th>Cadre</th>
+                                        <th>Role</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    <tr>
+                                        <td>1</td>
+                                        <td>{{ form_widget(form.grade1,
+                                                {'attr': {'class': 'form-control dropdown-toggle'}})}}</td>
+                                        <td>{{ form_widget(form.cad1,
+                                                {'attr': {'class': 'form-control dropdown-toggle text-capitalize','placeholder':'Entrer Nom de président'}})}}</td>
+                                        <td>رئيس</td>
+                                    </tr> <tr>
+                                        <td>2</td>
+                                        <td>{{ form_widget(form.grade2,
+                                                {'attr': {'class': 'form-control dropdown-toggle'}})}}</td>
+                                        <td>{{ form_widget(form.cad2,
+                                                {'attr': {'class': 'form-control dropdown-toggle text-capitalize','placeholder':'Entrer Nom de cadre'}})}}</td>
+                                        <td>عضو</td>
+                                    </tr> <tr>
+                                        <td>3</td>
+                                        <td>{{ form_widget(form.grade3,
+                                                {'attr': {'class': 'form-control dropdown-toggle'}})}}</td>
+                                        <td>{{ form_widget(form.cad3,
+                                                {'attr': {'class': 'form-control dropdown-toggle text-capitalize','placeholder':'Entrer Nom de cadre'}})}}</td>
+                                        <td>عضو</td>
+                                    </tr> <tr>
+                                        <td>4</td>
+                                        <td>{{ form_widget(form.grade4,
+                                                {'attr': {'class': 'form-control dropdown-toggle'}})}}</td>
+                                        <td>{{ form_widget(form.cad4,
+                                                {'attr': {'class': 'form-control dropdown-toggle text-capitalize','placeholder':'Entrer Nom de cadre'}})}}</td>
+                                        <td>عضو</td>
+                                    </tr> <tr>
+                                        <td>5</td>
+                                        <td>{{ form_widget(form.grade5,
+                                                {'attr': {'class': 'form-control dropdown-toggle'}})}}</td>
+                                        <td>{{ form_widget(form.cad5,
+                                                {'attr': {'class': 'form-control dropdown-toggle text-capitalize','placeholder':'Entrer Nom de cadre'}})}}</td>
+                                        <td>عضو</td>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </fieldset>
+                        <hr>
+                        <fieldset class=" card-header border-bottom-dark border-left-dark" >
+                            <h5  style="color: red;text-align: right"><b>Produits Reçus</b></h5>
+                            <br>
+                            <ol   class="tags" data-prototype="{{ form_widget(form.lignepvs.vars.prototype)|e('html_attr') }}">
+                                {% for l in form.lignepvs %}
+                                    <li class="row">
+                                        {{ form_label(l.produit) }}
+                                        {{ form_widget(l.produit) }}
+
+                                        {{ form_label(l.quantite) }}
+                                        {{ form_widget(l.quantite) }}
+
+                                    </li>
+                                {% endfor %}
+                            </ol>
+
+                                <div class="col">
+
+                                    <div class="form-group">
+                                        <div class="m-0 font-weight-bold text-primary">
+                                            {{ form_label(form.commentaire,'Remarques') }}
+                                        </div>
+                                        {{ form_widget(form.commentaire,
+                                            {'attr': {'class': 'form-control form-control-sm','placeholder':'Entrer Commentaires'}}) }}
+                                    </div>
+                                </div>
+                        </fieldset>
+                        <br>
+                        <a  href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#submitModal">Valider</a>
+
+
+                        <!-- submit Modal-->
+                        <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog " role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header modal-colored-header bg-primary">
+                                        <h5 class="modal-title text-white" id="exampleModalLabel">Demande de confirmation</h5>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span class="text-white" aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">Êtes-vous sûr de vouloir continuer ?</div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+                                        <button class="btn btn-primary" type="submit">Valider</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end-->                    </div>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- Embed Collection -->
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('embed5.js') }}"></script>
+    <!-- Embed Collection -->
+
+
+
+
+
+    </body>
+{% endblock %}
+

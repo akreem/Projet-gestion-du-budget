@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Ordre de paiement
+    </title>
+    <style>
+        table {
+            direction: rtl;
+
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+
+        th,td {
+            direction: rtl;
+            border: 1px solid black;
+            padding: 8px;
+
+        }
+
+
+        h4
+        {
+            margin-bottom:2% ;
+
+
+
+        }
+        h2{
+            margin:0px ;
+        }
+
+
+    </style>
+</head>
+
+<body>
+<table border="1">
+
+    <tbody>
+    <tr>
+        <td rowspan="9" style="text-align: center ;vertical-align:top;width: 32%">
+            <h4> الجمهوريــــــــــة التونسيــــــــة  </h4>
+            <h4> وزارة الدفــــــــــــاع الوطنــــــي  </h4>
+            <h4> جيـــــــــــــــش الطيــــــــــــــران</h4>
+            <h4> مدرســة الأختصــاصـات الجـوية</h4>
+        </td>
+        <td rowspan="5" colspan="2" style="text-align: center;"><h2> أمر بالصـرف عــدد {{ op.num }}</h2></td>
+        <td style="font-weight: bold" width="20%">سنة الاصدار</td>
+        <td style="text-align: center">{{ op.annee }}</td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold">السنة المالية العائد اليها الدين</td>
+        <td style="text-align: center">{{ op.annee }}</td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold">العـنوان</td>
+        <td style="text-align: center">{{ op.letitre }}</td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold">القـسم</td>
+        <td style="text-align: center">{{ op.section }}</td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold">الفـصل</td>
+        <td style="text-align: center">{{ op.classe }}</td>
+    </tr>
+    <tr><td rowspan="4" colspan="2"style="text-align: center" >
+            طبقا للاعتمادات المرصودة بالميزانية,يتولى (1)<br><br>
+        <strong>المحاسب المكلف بالدفع لمدرسة الاختصاصات الجوية </strong>
+        <br>
+        <br>
+        أداء المبلغ الاتي ذكره الذي يقيد بحسابه كنفقة بعد تقديم<br><br>
+        هذا الأمر بالصرف مدعما بالوثائق المذكورة.</td>
+        <td style="font-weight: bold">الفقرة</td>
+        <td style="text-align: center">{{ op.paragraph }}</td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold">الفقرة الفرعية</td>
+        <td style="text-align: center">{{ op.subparagraph }}</td>
+
+    </tr><tr>
+        <td style="font-weight: bold">رقم التأشيرة</td>
+        <td style="text-align: center">{{ op.visa }}</td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold">تـاريخ التأشيرة</td>
+        <td style="text-align: center">{{ op.date |date("Y/m/d") }}</td>
+    </tr>
+
+    </tbody>
+</table>
+
+<table>
+
+    <tbody>
+    <tr>
+        <td width="20%" style="font-weight: bold">المستفيــد :</td>
+        <td>{{ op.nomf }}</td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold">موضوع النفقة :</td>
+        <td>{{ op.titre }}</td>
+    </tr>
+    <tr>
+        <td style="font-weight: bold">الوثائق المثبتة للنفقة (2) :</td>
+        <td>{{ op.preuve }}</td>
+    </tr>
+    </tbody></table>
+<table>
+    <tbody><tr>
+        <td rowspan="5"  style="text-align: center ;vertical-align:top;width: 50%"><strong>تأشيرة المحــاسب</strong><br><br>
+        صالح للدفع أو التحويل بما قدره (3)
+        <br><br><br>
+            <strong>{{ op.montantarabe }}</strong>
+        </td>
+        <td width="20%">- المبلغ الخام للنفقة </td>
+        <td><strong>{{ op.montant }}</strong></td>
+    </tr>
+    <tr>
+        <td >-  الخصم من المورد</td>
+        <td>{{ op.remisefour }}</td>
+    </tr>
+    <tr>
+        <td>- الخصم من القيمة المضافة</td>
+        <td>{{ op.remisetva }}</td>
+    </tr>
+    <tr>
+        <td>- جملة الخصم</td>
+        <td>{{ op.totalremise }}</td>
+    </tr>
+    <tr>
+        <td>- المبلغ الصــافي للدفع</td>
+        <td><strong>{{ op.montantnet }}</strong></td>
+    </tr>
+    <tr>
+        <td style="text-align: center">الهوية البنكية أو البريدية (3)
+        <br>
+        <br>
+        {{ op.idbancaire }}</td>
+        <td colspan="2" style="text-align: center">أوقف هذا الأمر بالصرف بما قدره
+        <br><br>
+        <strong>{{ op.montantarabe }}</strong>
+            <br><br>
+بصفــاقس في : ....................
+            <br>
+            العقيد حمودة بسيس,امر الصرف
+            <br>
+            بمدرسة الاختصاصات الجــوية
+            <br><br><br><br>
+        </td>
+    </tr>
+    </tbody></table>
+<table>
+    <tbody><tr><td style="text-align: center"><h3 style="margin: 0%">الدفع بالتحويل</h3></td></tr>
+    </tbody></table>
+<table>
+    <tbody><tr>
+        <td style=";width: 50%"><div style="text-align: center;font-weight: bold">تعمر عند الدفع لحساب بريدي</div>
+        <br>
+             <strong>موضوع التحويل :</strong>
+            <span>{{ op.titre }}</span>
+            <br>
+            <br>
+            <strong>المستفيــــــــــــد :</strong>
+            <span>{{ op.nomf }}</span>
+
+            <br>
+            <br>
+             <strong>الهويــة البريدية :</strong>
+            <span>{{ op.idbancaire }}</span>
+        </td>
+        <td style="vertical-align:top"><div style=" text-align: center;font-weight: bold">تعمر في جميع حالات الدفع بالتحويل</div>
+        <br>
+            <strong>المبلغ الصافي للدفع  :</strong>
+            <span style="font-weight: bold">{{ op.montantnet }}&nbsp;&nbsp;دينــار</span>
+
+            <br>
+            <br>
+            <strong>المستفيـــــــــــــــــد :</strong>
+            <span>{{ op.nomf }}</span>
+            <br>
+            <br>
+            <strong>الهويــة البريدية :</strong>
+            <span>{{ op.idbancaire }}</span>
+
+
+        </td>
+    </tr>
+    <tr>
+        <td>(1) أذكر المحاسب المكلف بالدفع.
+        <br><br>
+            (2) أذكر على ظهر الصفحة ما لا يمكن ذكره في القسيمة.
+            <br><br>
+            (3) للتعمير عند الاقتضاء .
+        </td>
+        <td>           <strong>               أمر بالصرف عدد  :</strong>
+            <span>{{ op.num }}</span>
+
+            <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+            <strong>عدد الوثائق المرفقة :</strong>
+            <span>3</span>
+
+            <br>
+            <br>
+            <strong>الفصل :</strong>
+            <span>{{ op.section }}-{{ op.classe }}</span>
+
+            <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+            <strong>الفقرة :</strong>
+            <span>{{ op.paragraph }}</span>
+
+            <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+            <strong>الفقرة الفرعية:</strong>
+            <span>{{ op.subparagraph }}</span>
+
+            <br>
+            <br>
+            <strong>السنة المالية :</strong>
+            <span>{{ op.annee }}</span>
+
+        </td>
+    </tr>
+    </tbody></table>
+<table>
+    <tbody><tr>
+        <td style="width: 50%"><strong>سدد بالتحويل الى الحساب :</strong>
+            <span>{{ op.idbancaire }}</span>
+
+        </td>
+        <td><strong>بواسطة الصك عدد :</strong>
+            <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+        <strong>  بتــاريخ :</strong>
+            <span>{{ op.date |date("Y/m/d") }}</span>
+        </td>
+    </tr>
+    </tbody></table>
+
+
+
+</body></html>

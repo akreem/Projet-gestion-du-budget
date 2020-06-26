@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>
-        جـدول حوصـلــة الاثـمـــان
+        PDFجـدول حوصـلــة الاثـمـــان
     </title>
     <style>
         table {
@@ -60,11 +60,11 @@
 
     <div style="text-align: center;">
         <h2  style="margin-bottom: 12px"  >جـدول حوصـلــة الأثـمـــان</h2>
-        <h4 dir="rtl">المـزود: {{ f.nomfournisseur }}</h4>
+        <h4 dir="rtl"> المـزود : {{ f.nomfournisseur }}</h4>
 
-        <h4>  السنــة المـاليــة : {{ "now"|date("Y") }}</h4>
+        <h4>  السنــة المـاليــة : {{ tr.annee }}</h4>
         <h4>عـنـــوان الفصـل : تـاثيـــث الادارة </h4>
-        <h4> التبـويــب : 02-201-05-001</h4>
+        <b dir="ltr">{{ tr.devis.rubrique }} : التبـويــب</b>
     </div>
 
 
@@ -77,7 +77,6 @@
 
     <tr>
 
-        <th rowspan="3">ع/ر	</th>
         <th rowspan="3">المواد المطلوبة	</th>
         <th rowspan="3">الكمية</th>
         <th rowspan="3">TVA</th>
@@ -99,17 +98,16 @@
 {% for l in lr %}
   {% if l.nomfournisseur==f.nomfournisseur %}
     <tr>
-        <td>{{ 1 }}</td>
         <td>{{ l.produit }}</td>
 
         <td> {{ l.quantite }}</td>
-        <td>{{ l.tva }}</td>
+        <td>{{ l.tva }}%</td>
         <td>{{ l.puHt }}</td>
         <td>{{ l.totalHt }}</td>
 
         {% set nbl=nbl+1 %}
 
-        {% set tottva=tottva+l.tva %}
+        {% set tottva=tottva+l.montanttva %}
         {% set totht=totht+l.totalHt %}
         {% set totttc=totht+tottva %}
 
@@ -119,19 +117,19 @@
 {% endfor %}
 
     <tr>
-        <td colspan="2" style="text-align: right"><b>المجموع دون احتساب الاداءات:</b></td>
+        <td colspan="4" style="text-align: right"><b>المجموع دون احتساب الاداءات:</b></td>
         <td colspan="5" > {{ totht }}  </td>
 
 
     </tr>
     <tr>
-        <td colspan="2" style="text-align: right" > <b>الأداء على القيمة المضافة:</b></td>
+        <td colspan="4" style="text-align: right" > <b>الأداء على القيمة المضافة:</b></td>
 
         <td colspan="5">{{ tottva }}</td>
 
     </tr>
     <tr>
-        <td colspan="2" style="text-align: right" ><b>المجموع باحتساب الاداءات:</b></td>
+        <td colspan="4" style="text-align: right" ><b>المجموع باحتساب الاداءات:</b></td>
         <td colspan="5">{{ totttc }}</td>
 
 

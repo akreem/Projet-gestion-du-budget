@@ -3,6 +3,8 @@
 {% block title %}Hello!{% endblock %}
 
 {% block body %}
+    <title>Modifier Devis Vierge</title>
+
     <style>
         .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
         .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
@@ -26,15 +28,7 @@
 
 
                     <div class="row">
-                        <div class="col">
 
-                <div class="form-group">
-                    <div class="m-0 font-weight-bold text-primary">
-                        {{ form_label(form.date_edition,'Date édition') }}
-                    </div>
-                    {{ form_widget(form.date_edition) }}
-                </div>
-                        </div>
 
             <div class="col">
 
@@ -46,7 +40,16 @@
                     {{ form_widget(form.date_limite) }}
                 </div>
             </div>
+                        <div class="col">
 
+                            <div class="form-group">
+                                <div class="m-0 font-weight-bold text-primary">
+                                    {{ form_label(form.rubrique,'Rubrique') }}
+                                </div>
+                                {{ form_widget(form.rubrique,
+                                    {'attr': {'class': 'form-control form-control-sm','placeholder':'Entrer Rubrique'}}) }}
+                            </div>
+                        </div>
                         <div class="col">
 
                         <div class="form-group">
@@ -54,7 +57,7 @@
                 {{ form_label(form.nb_devis_edit,'Nombre Devis Editèes') }}
             </div>
             {{ form_widget(form.nb_devis_edit,
-                {'attr': {'class': 'form-control dropdown-toggle','value' :'3','min' : 0,}}) }}
+                {'attr': {'class': 'form-control form-control-sm','value' :'3','min' : 0,}}) }}
         </div>
                         </div>
                     </div>
@@ -63,7 +66,7 @@
 
                     <div class="table-responsive">
                         <table name="cart" class="table table-bordered" width="100%" cellspacing="0" id="myTable" >
-                            <thead style="background-color: #ff253a;opacity: 0.9; color: #FFFFFF";>
+                            <thead style="background-color: slateblue;opacity: 0.9; color: #FFFFFF";>
                             <tr role="row">
                                 <th>#</th>
                                 <th>Produit</th>
@@ -110,12 +113,12 @@
                         <div class="modal-dialog " role="document">
                             <div class="modal-content">
                                 <div class="modal-header modal-colored-header bg-primary">
-                                    <h5 class="modal-title text-white" id="exampleModalLabel">Sure?</h5>
+                                    <h5 class="modal-title text-white" id="exampleModalLabel">Demande de confirmation</h5>
                                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                         <span class="text-white" aria-hidden="true">×</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">Are you sure you want to submit?</div>
+                                <div class="modal-body">Êtes-vous sûr de vouloir continuer ?</div>
                                 <div class="modal-footer">
                                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
                                     <button class="btn btn-primary" type="submit">Valider</button>

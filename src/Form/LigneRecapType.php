@@ -26,6 +26,22 @@ class LigneRecapType extends AbstractType
 
                 ]
             ])
+            ->add('montanttva',NumberType::class,[
+                'attr'=>[
+                    'step'=>'0.001',
+                    'jAutoCalc'=>'{ttht1} * {ttva1}/100'
+
+                ],
+                'empty_data'=>'0'
+            ])
+            ->add('totalttc',NumberType::class,[
+                'attr'=>[
+                    'step'=>'0.001',
+                    'jAutoCalc'=>'{ttht1} + {totaltva}'
+
+                ],
+                'empty_data'=>'0'
+            ])
         ;
     }
 

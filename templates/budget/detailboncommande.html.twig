@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        طلب تزود عدد {{ b.annee }}/{{ b.num }}
+    </title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+
+        }
+
+
+        th,td {
+            border: 1px solid black;
+            text-align: center;
+            padding: 8px;
+
+        }
+
+
+        h4
+        {
+            margin:0px ;
+
+
+
+        }
+        h2{
+            margin:0px ;
+        }
+
+
+
+
+    </style>
+
+
+
+</head>
+
+<body>
+
+    <div>
+
+
+        <div  style="float: right;">
+            <h4> الجمهوريــــــــــة التونسيــــــــة  </h4>
+            <h4> وزارة الدفــــــــــــاع الوطنــــــي  </h4>
+            <h4> جيـــــــــــــــش الطيــــــــــــــران</h4>
+            <h4> مدرســة الأختصــاصـات الجـوية</h4>
+
+
+        </div>
+        <br>
+        <br><br>
+        <br><br>
+
+        <div style="text-align: center;">
+            <h2  style="margin-bottom: 12px"  >طلـــب تــزوَد عـدد 2020/{{ b.num }}</h2>
+            <h4>  السنــة المـاليــة : {{ b.annee }}</h4>
+            <h4>عـنـــوان الفصـل : تـاثيـــث الادارة </h4>
+            <b dir="ltr">{{ b.devisVierge.rubrique}} : التبـويــب</b>
+        </div>
+
+
+    </div>
+
+    <br><br>
+    <h4 dir="rtl"> مدرســة الأختصــاصـات الجـوية : طريق سكرة كلم 4,5 حي الحـبيب - 3052 صفــاقس </h4>
+    <h4 dir="ltr" style="margin-top: 15px">Ecole des Spécialités Aéronotiques - Rte de Soukra km 4,5 Cité El Habib - 3052 SFAX </h4>
+
+    <br>
+    <table class="table table-bordered" width="100%" cellspacing="0" dir="rtl">
+        <thead>
+
+        <tr>
+
+            <th rowspan="3">بيــان المواد المطلوبة	</th>
+            <th rowspan="3">الكمية</th>
+            <th rowspan="3">TVA</th>
+            <th>السعر الفردي<br>
+                خـارج الأداءات</th>
+            <th>المجموع<br>
+                خـارج الأداءات</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% set tottva=0 %}
+        {% set totht=0 %}
+        {% set totttc=0 %}
+        {% set nbl=0 %}
+
+        {% for k,l in b.ligneCommandes %}
+
+        <tr>
+            <td>{{ l.produit }}</td>
+
+            <td> {{ l.quantite }}</td>
+            <td>{{ l.tva }}%</td>
+            <td>{{ l.puht }}</td>
+            <td>{{ l.totalht }}</td>
+
+            {% set nbl=nbl+1 %}
+
+            {% set tottva=tottva+l.montanttva %}
+            {% set totht=totht+l.totalht %}
+            {% set totttc=totht+tottva %}
+
+
+        <tr>
+
+            {% endfor %}
+
+
+        <tr>
+            <td colspan="2" style="border: none"></td>
+
+            <td colspan="2" style="text-align: right"><b>المجموع دون احتساب الاداءات:</b>
+            <td> {{ totht }}  </td>
+
+
+        </tr>
+        <tr>
+            <td colspan="2" style="border: none"></td>
+
+            <td colspan="2" style="text-align: right" > <b>الأداء على القيمة المضافة:</b></td>
+
+            <td>{{ tottva }}</td>
+
+        </tr>
+        <tr>
+            <td colspan="2" style="border: none"></td>
+
+            <td colspan="2" style="text-align: right" ><b>المبلغ الجملي باحتساب الاداءات:</b></td>
+            <td >{{ totttc }}</td>
+
+
+
+        </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    {% set x=12-nbl %}
+
+    <br>
+
+
+    <h3 style="text-align: right;">:الــــــمزود</h3>
+    <h3 style="text-align: right;">{{ b.nomf }}
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br>{{ b.addrf }}
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br>Tèl:&nbsp;{{ b.telf }}
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+
+    <br>
+    <br> <br>
+
+    <h4>...........................بصفاقس في
+        <br>
+        <br>
+
+        الامضــــــــــــــــاء والخـتـــــــــــــم </h4>
+    <br><br><br><br><br><br>
+
+
+
+</body>
+</html>
+
+

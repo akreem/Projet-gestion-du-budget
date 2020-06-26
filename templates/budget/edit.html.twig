@@ -3,6 +3,7 @@
 {% block title %}Hello DevisController!{% endblock %}
 
 {% block body %}
+    <title>Modifier Budget {{ budget.annee }}</title>
 
 
     <style>
@@ -37,15 +38,6 @@
                                     {'attr': {'class': 'form-control form-control-sm','value':'2020','min':'2015'},'type':'number'}) }}
                             </div>
 
-
-                            <div class="form-group col-md-4">
-                                <div class="m-0 font-weight-bold text-primary">
-                                    {{ form_label(form.date) }}
-                                </div>
-                                {{ form_widget(form.date) }}
-                            </div>
-                        </div>
-                        <div class="row">
                             <div class="form-group col-md-4">
                                 <div class="m-0 font-weight-bold text-primary">
                                     {{ form_label(form.totalht,'Total HT Reserver') }}
@@ -56,29 +48,6 @@
                                 }) }}
                             </div>
 
-
-
-                            <div class="form-group col-md-4">
-                                <div class="m-0 font-weight-bold text-primary">
-                                    {{ form_label(form.totalnpaye,'Total Engagement Non Payè') }}
-                                </div>
-                                {{ form_widget(form.totalnpaye,{'attr': {
-                                    'class': ' form-control form-control-sm ','label':'tenp'
-                                    ,'step':'0.01'
-                                }
-                                }) }}
-
-                            </div>
-
-                            <div class="form-group col-md-4">
-                                <div class="m-0 font-weight-bold text-primary">
-                                    {{ form_label(form.totalpaye,'Total Engagement Payè') }}
-                                </div>
-                                {{ form_widget(form.totalpaye,{'attr': {'class': ' form-control form-control-sm ','label':'tep'
-                                    ,'step':'0.01'
-                                }
-                                }) }}
-                            </div>
                         </div>
                     <br>
 
@@ -86,14 +55,12 @@
 
                     <div class="table-responsive">
                         <table name="cart" class="table table-bordered" width="100%" cellspacing="0" id="myTable" >
-                            <thead style="background-color: #ff253a;opacity: 0.9; color: #FFFFFF";>
+                            <thead style="background-color: slateblue;opacity: 0.9; color: #FFFFFF";>
                             <tr role="row">
                                 <th>#</th>
                                 <th>Code</th>
                                 <th>Titre</th>
                                 <th>Montant</th>
-                                <th style="width: 197px;">Engagement Non Payè</th>
-                                <th  style="width: 167px;">Engagement Payè</th>
                                 <th></th>
 
                             </tr>
@@ -129,18 +96,6 @@
                                     })}}
                                 </td>
 
-                                <td>
-
-                                    {{ form_widget(l.engagementnpaye,
-                                        {'attr': {'class': 'form-control form-control-sm','label':'enp','empty_data':'0'
-                                            ,'step':'0.01'},'type':'number'}) }}
-
-                                </td>
-                                <td>
-                                    {{ form_widget(l.engagementpaye,
-                                        {'attr': {'class': ' form-control form-control-sm','label':'ep'
-                                            ,'step':'0.01'},'type':'number'}) }}
-                                </td>
 
                                 {% endfor %}
 
@@ -156,12 +111,12 @@
                             <div class="modal-dialog " role="document">
                                 <div class="modal-content">
                                     <div class="modal-header modal-colored-header bg-primary">
-                                        <h5 class="modal-title text-white" id="exampleModalLabel">Sure?</h5>
+                                        <h5 class="modal-title text-white" id="exampleModalLabel">Demande de confirmation</h5>
                                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                             <span class="text-white" aria-hidden="true">×</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">Are you sure you want to submit?</div>
+                                    <div class="modal-body">Êtes-vous sûr de vouloir continuer ?</div>
                                     <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
                                         <button class="btn btn-primary" type="submit">Valider</button>

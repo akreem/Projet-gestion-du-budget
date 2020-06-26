@@ -58,6 +58,26 @@ class LigneRecap
      */
     private $nomfournisseur;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $addrf;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $telf;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $montanttva;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $totalttc;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -157,6 +177,54 @@ class LigneRecap
     public function setNomfournisseur(string $nomfournisseur): self
     {
         $this->nomfournisseur = $nomfournisseur;
+
+        return $this;
+    }
+
+    public function getAddrf(): ?string
+    {
+        return $this->addrf;
+    }
+
+    public function setAddrf(string $addrf): self
+    {
+        $this->addrf = $addrf;
+
+        return $this;
+    }
+
+    public function getTelf(): ?int
+    {
+        return $this->telf;
+    }
+
+    public function setTelf(int $telf): self
+    {
+        $this->telf = $telf;
+
+        return $this;
+    }
+
+    public function getMontanttva(): ?float
+    {
+        return $this->montanttva;
+    }
+
+    public function setMontanttva(float $montanttva): self
+    {
+        $this->montanttva = $montanttva;
+
+        return $this;
+    }
+
+    public function getTotalttc(): ?float
+    {
+        return $this->totalttc;
+    }
+
+    public function setTotalttc(float $totalttc): self
+    {
+        $this->totalttc = $totalttc;
 
         return $this;
     }

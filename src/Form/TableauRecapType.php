@@ -26,7 +26,7 @@ class TableauRecapType extends AbstractType
 
             ->add('totaltva',NumberType::class,[
                 'attr'=>[
-                    'jAutoCalc'=>'SUM({ttva1})'
+                    'jAutoCalc'=>'SUM({totaltva})'
 
                 ]
             ])

@@ -87,6 +87,11 @@ class Devis
      */
     private $tabRecaps;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $rubrique;
+
 
 
 
@@ -295,6 +300,18 @@ class Devis
                 $tabRecap->setDevis(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRubrique(): ?string
+    {
+        return $this->rubrique;
+    }
+
+    public function setRubrique(string $rubrique): self
+    {
+        $this->rubrique = $rubrique;
 
         return $this;
     }

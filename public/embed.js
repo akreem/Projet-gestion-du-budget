@@ -6,7 +6,7 @@ var $addLigneButton = $('<button  class="add_tag_link btn btn-success btn-icon-s
     '                    <span class="icon text-white-50">\n' +
     '                      <i class="fas fa-plus"></i>\n' +
     '                    </span>\n' +
-    '                    <span class="text">Add New Ligne</span></button>');
+    '                    <span class="text">Ajouter Ligne</span></button>');
 var $newLinkLi = $('<ol></ol>').append($addLigneButton);
 
 
@@ -63,7 +63,7 @@ function addLigneForm($collectionHolder, $newLinkLi) {
 
 function addLigneFormDeleteLink($ligneFormLi) {
     var $removeFormButton = $('<button class="btn btn-danger btn-icon-split " >' +
-        '<span class="icon text-white-50"> <i class="fas fa-trash"></i> </span><span class="text">Delete this Ligne</span>' +
+        '<span class="icon text-white-50"> <i class="fas fa-trash"></i> </span><span class="text">Supprimer</span>' +
         '</button><br><br>');
     $ligneFormLi.append($removeFormButton);
 
