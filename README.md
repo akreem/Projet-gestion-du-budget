@@ -26,3 +26,9 @@ le compte de résultat, le suivi des flux de trésorerie, etc.
 
 ### Gestion des Données Fiscales: 
 Suivi des obligations fiscales de l'école, génération des déclarations fiscales, gestion des taxes et impôts.\
+
+## Utilisation
+Connectez-vous à l'application en tant qu'administrateur ou utilisateur autorisé.\
+Enregistrez les comptes financiers de l'école, les recettes et les dépenses dans l'interface dédiée.\
+Facturez les frais de scolarité et autres frais aux étudiants, effectuez le suivi des paiements et gérez les comptes débiteurs.\
+Utilisez les rapports financiers pour évaluer la santé financière de l'école et prendre des décisions éclairées concernant la gestion des finances.
