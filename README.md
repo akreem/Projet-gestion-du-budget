@@ -1,7 +1,7 @@
 # Gestion de Budget - Projet de Fin d'Étude
 ## Introduction
-Bienvenue dans le projet de gestion des finances pour une école d'aviation ! Cette application est conçue pour aider à gérer\
-efficacement les finances au sein d'une école d'aviation, que ce soit pour des activités de formation des pilotes, la maintenance\
+Bienvenue dans le projet de gestion des finances pour une école d'aviation ! Cette application est conçue pour aider à gérer
+efficacement les finances au sein d'une école d'aviation, que ce soit pour des activités de formation des pilotes, la maintenance
 des avions, l'achat de matériel pédagogique ou toute autre dépense liée au fonctionnement de l'école.
 
 ## Fonctionnalités
